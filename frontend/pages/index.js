@@ -1,27 +1,46 @@
-import Head from 'next/head'
 import Link from 'next/link'
-import styles from '../styles/Home.module.css'
-import Page from './datas'
 
+
+let today = new Date()
+let yyyy = today.getFullYear()
+let mm = today.getMonth()+1
+let dd = today.getDate()
+if(dd<10) {
+  dd+='0'
+} 
+
+if(mm<10) {
+  mm +='0'
+} 
+today = yyyy + mm + dd + "0000";
+
+console.log(today)
+  
 export default  function Home({posts}) {
-  const data = posts.response.body.items
+  const rowdatas = posts
+  console.log("POST", rowdatas[0])
+  
+  let newdatas = []
+  for(let i = 0 ; i < rowdatas.length ; i++) {
+    if(rowdatas[i].totalCount != 0) {
+      newdatas.push(rowdatas[i])
+    }
+  }  
+  console.log("OLD", rowdatas)
+  console.log("NEW", newdatas)
 
   return (
-    <div className={styles.container}>
+    <div>
       <ul>
-        {data.map(data => (
+        {rowdatas.map(data => (
           <div key={data.bfSpecRgstNo}>
             <br/>
               <li>기관명 : {data.rlDminsttNm}</li>
               <li>사업명 : {data.prdctClsfcNoNm}</li>
               <li>접수등록 : {data.rcptDt}</li>
               <li>마감 : {data.opninRgstClseDt}</li>
-              <li>배정예산 : {data.asignBdgtAmt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</li>
+              <li>배정예산 : {data.bfSpecRgstNo.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</li>
               <li>파일 : <Link to={data.specDocFileUrl1}>다운로드 링크</Link></li>
-              <li>파일 : <Link to={data.specDocFileUrl2}>다운로드 링크</Link></li>
-              <li>파일 : <Link to={data.specDocFileUrl3}>다운로드 링크</Link></li>
-              <li>파일 : <Link to={data.specDocFileUrl4}>다운로드 링크</Link></li>
-              <li>파일 : <Link to={data.specDocFileUrl5}>다운로드 링크</Link></li>
             <br/>
           </div>
         ))}
@@ -31,12 +50,14 @@ export default  function Home({posts}) {
 }
 
 export const getServerSideProps = async () => {
-  const api = await fetch("http://apis.data.go.kr/1230000/HrcspSsstndrdInfoService/getInsttAcctoThngListInfoThng?serviceKey=93KBnFsKzHe%2FGK1nzHq0z04qOkgHolPfnWuGBvSoxMuJ3XW4%2F6FguYCmerWsd2Sf6tV4supaKu9y5ng2Nf7KhA%3D%3D&numOfRows=10&pageNo=1&inqryBgnDt=202112150000&inqryEndDt=202112240000&rlDminsttNm=%EA%B5%AD%EB%AF%BC%EA%B1%B4%EA%B0%95%EB%B3%B4%ED%97%98%EA%B3%B5%EB%8B%A8&type=json")
 
+  /*건보 물품*/
+  const api = await fetch('http://localhost:5000/sajeon')
   const posts = await api.json()
+
   return {
     props: {
-      posts: posts
+      posts: [posts]
     }
   }
 }
