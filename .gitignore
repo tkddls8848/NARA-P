@@ -1,7 +1,7 @@
 
 # Created by https://www.toptal.com/developers/gitignore/api/nextjs,react
 # Edit at https://www.toptal.com/developers/gitignore?templates=nextjs,react
-
+.env
 ### NextJS ###
 # Next build dir
 .next/
