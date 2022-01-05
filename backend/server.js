@@ -14,7 +14,7 @@ app.get('/sajeon', (req, res) => {
     const url = 'http://apis.data.go.kr/1230000/HrcspSsstndrdInfoService/getInsttAcctoThngListInfoThng'
     const url1 = 'http://apis.data.go.kr/1230000/HrcspSsstndrdInfoService/getInsttAcctoThngListInfoCnstwk'
     const url2 = 'http://apis.data.go.kr/1230000/HrcspSsstndrdInfoService/getInsttAcctoThngListInfoServc'
-    const serviceKey = 'serviceKey=93KBnFsKzHe%2FGK1nzHq0z04qOkgHolPfnWuGBvSoxMuJ3XW4%2F6FguYCmerWsd2Sf6tV4supaKu9y5ng2Nf7KhA%3D%3D'
+    const serviceKey = process.env.SERVICE_KEY
     const datasize = 'numOfRows=20&pageNo=1'
     const date = 'inqryBgnDt=202106150000&inqryEndDt=202106182359'
     const departname = 'rlDminsttNm=%EA%B5%AD%EB%AF%BC%EA%B1%B4%EA%B0%95%EB%B3%B4%ED%97%98%EA%B3%B5%EB%8B%A8'
