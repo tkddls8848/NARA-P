@@ -1,48 +1,25 @@
-import SajeonTask from '../component/sajeonTask'
-import BoneTask from '../component/boneTask'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
 
-let today = new Date()
-let yyyy = today.getFullYear()
-let mm = today.getMonth()+1
-let dd = today.getDate()
-if(dd<10) {
-  dd+='0'
-} 
-if(mm<10) {
-  mm +='0'
-} 
-today = yyyy + mm + dd + "0000"
-console.log(today)  
-export default  function Home({fromServer}) {
-  const tasks = fromServer
-  /*
-    const newdatas = []
-    for(let i = 0 ; i < rowdatas.length ; i++) {
-      if(rowdatas[i].totalCount != 0) {
-        newdatas.push(rowdatas[i])
-      }
-    }  
-  */
+const button = ({onClick}) => (
+  <button onClick={onClick}></button>
+)
+
+export default  function Index() {
+  const [data, setData] = useState()
+  const [category, setCategory] = useState()
+
+  const onClick = async () => {
+    const json = await axios.get('http://localhost:5000/test')
+    setData(json.data[Object.keys(json.data)[0]])
+    console.log(json.data, data, Object.keys(json)[0])
+  }
+
   return (
     <div>
-      {tasks.map((taskType) => (
-        taskType.items.map((task)=> (
-          <BoneTask task={task}></BoneTask>
-        ))
-      ))}
+      <button onClick={onClick}>TEST Button</button>
+      {[data]}
     </div>
   )
-}
-
-export const getServerSideProps = async () => {
-
-  let fromServer = await axios.get('http://localhost:5000/bone')
-  fromServer = fromServer.data
-  console.log("F",fromServer)
-  return {
-    props: {
-      fromServer
-    }
-  }
 }

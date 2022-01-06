@@ -3,8 +3,10 @@ const axios = require('axios');
 const urlencode = require('urlencode');
 const app = express()
 const dotenv = require('dotenv').config({ path: '../.env' })
+const cors = require('cors')
 
 app.use(express.json()); 
+app.use(cors())
 app.use(express.urlencoded( {extended : true } ));
 app.listen(process.env.PORT, () => {
     console.log("SERVER ON")
@@ -35,7 +37,7 @@ app.get('/sajeon', (req, res) => {
             dataSet.push(result.data.response.body)
             dataSet.push(result1.data.response.body)
             dataSet.push(result2.data.response.body)
-            res.json(dataSet)
+            res.json({'sajeon' : dataSet})
        }))
     }
     getData(api + '||' + api1 + '||' + api2)
@@ -65,9 +67,13 @@ app.get('/bone', (req, res) => {
                 dataSet.push(result.data.response.body)
                 dataSet.push(result1.data.response.body)
                 dataSet.push(result2.data.response.body)
-                res.json(dataSet)
+                res.json({'bone': dataSet})
             })
         )
     }
     getData(api + "||" + api1 + "||" + api2)
+})
+
+app.get('/test', (req, res) => {
+    res.json({'TEST': 'this is test'})
 })
