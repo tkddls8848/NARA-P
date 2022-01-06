@@ -1,6 +1,7 @@
 import SajeonTask from '../../component/sajeonTask'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { Container, Grid } from '@mui/material'
 
   /*
 let today = new Date()
@@ -24,16 +25,21 @@ export default  function Index({fromServer, type}) {
 
   const [tasks, setTasks] = useState(fromServer)
   const [category, setCategory] = useState(type)
+  const [departname, setDepartname] = useState('')
   console.log(tasks)
   console.log(category)
 
   return (
     <div>
-      {tasks.map((taskType) => (
-        taskType.items.map((task)=> (
-          <SajeonTask task={task}></SajeonTask>
-        ))
-      ))}
+      <Grid container columnSpacing={1} rowSpacing={1}>
+        {tasks.map((taskType) => (
+          taskType.items.map((task)=> (
+            <Grid item xs={4}>
+            <SajeonTask task={task}></SajeonTask>
+            </Grid>
+          ))
+        ))}
+      </Grid>
     </div>
   )
 }

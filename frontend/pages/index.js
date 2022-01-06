@@ -9,11 +9,12 @@ const button = ({onClick}) => (
 export default  function Index() {
   const [data, setData] = useState()
   const [category, setCategory] = useState()
-
+  const [departname, setDepartname] = useState("국민연금공단")
+  console.log(departname)
   const onClick = async () => {
-    const json = await axios.get('http://localhost:5000/test')
-    setData(json.data[Object.keys(json.data)[0]])
-    console.log(json.data, data, Object.keys(json)[0])
+    const json = await axios.get('http://localhost:5000/sajeon/' + departname)
+    console.log([json.data.sajeon[0].items], typeof([json.data.sajeon[0].items]))
+    setData("국민연금공단")
   }
 
   return (
