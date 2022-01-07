@@ -1,6 +1,7 @@
-import BoneTask from '../../component/boneTask'
+import BoneTask from '../../../component/boneTask'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { Container, Grid } from '@mui/material'
 
   /*
 let today = new Date()
@@ -28,13 +29,14 @@ export default  function Index({fromServer, type}) {
   console.log(category)
 
   return (
-    <div>
-      {tasks.map((taskType) => (
-        taskType.items.map((task)=> (
-          <BoneTask task={task}></BoneTask>
-        ))
-      ))}
-    </div>
+      <Grid container columnSpacing={1} rowSpacing={1}>
+        {tasks.map((taskType) => (
+          taskType.items.map((task)=> (
+            <Grid item xs={4}>
+            <BoneTask task={task}></BoneTask>
+          </Grid>))
+        ))}
+      </Grid>
   )
 }
 

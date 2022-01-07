@@ -1,4 +1,4 @@
-import SajeonTask from '../../component/sajeonTask'
+import SajeonTask from '../../../component/sajeonTask'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Container, Grid } from '@mui/material'
@@ -30,17 +30,14 @@ export default  function Index({fromServer, type}) {
   console.log(category)
 
   return (
-    <div>
       <Grid container columnSpacing={1} rowSpacing={1}>
         {tasks.map((taskType) => (
           taskType.items.map((task)=> (
             <Grid item xs={4}>
             <SajeonTask task={task}></SajeonTask>
-            </Grid>
-          ))
+            </Grid>))
         ))}
       </Grid>
-    </div>
   )
 }
 
