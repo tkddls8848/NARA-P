@@ -1,25 +1,9 @@
-import BoneTask from '../../../component/boneTask'
+import BoneTask from '../../component/boneTask'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { Container, Grid } from '@mui/material'
+import { useState } from 'react'
+import { Grid } from '@mui/material'
 
-  /*
-let today = new Date()
-let yyyy = today.getFullYear()
-let mm = today.getMonth()+1
-let dd = today.getDate()
-if(dd<10) {dd+='0'} 
-if(mm<10) {mm +='0'} 
-today = yyyy + mm + dd + "0000"
-console.log(today)  
-
-    const newdatas = []
-    for(let i = 0 ; i < rowdatas.length ; i++) {
-      if(rowdatas[i].totalCount != 0) {
-        newdatas.push(rowdatas[i])
-      }
-    }  
-  */
+const address = 'http://localhost:5000/'
 
 export default  function Index({fromServer, type}) {
 
@@ -42,7 +26,7 @@ export default  function Index({fromServer, type}) {
 
 export const getServerSideProps = async () => {
 
-  let fromServer = await axios.get('http://localhost:5000/bone')
+  let fromServer = await axios.get(address+'task/bone/')
   let type = Object.keys(fromServer.data)
   fromServer = fromServer.data[type]
 

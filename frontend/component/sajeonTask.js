@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Box, Container, Grid, Paper } from '@mui/material';
+import { Box } from '@mui/material';
 
 const SajeonTask = ({task}) => {
   return (

@@ -1,17 +1,14 @@
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Paper, Card } from '@mui/material';
+import BottomNavigation from '@mui/material/BottomNavigation'
+import { Paper, Typography, Box } from '@mui/material'
 
 const footer = () => (
-    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+  <Box sx={{ flexGrow: 1 }}>
+    <Paper sx={{ bottom: 0, left: 0, right: 0 }} elevation={3}>
         <BottomNavigation>
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Archive" icon={<FavoriteIcon />} />
+          <Typography component='div' key='footer'>This is Footer</Typography>
         </BottomNavigation>
   </Paper>
+  </Box>
 )
 
 export default footer
