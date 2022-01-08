@@ -1,24 +1,39 @@
 import SajeonTask from '../../../component/sajeonTask'
 import axios from 'axios'
-import { useState } from 'react'
-import { Grid } from '@mui/material'
+import { useState, useEffect } from 'react'
+import { Link, Grid, Button } from '@mui/material'
 
 const address = 'http://localhost:5000/'
+const frontAddress = 'http://localhost:3000/'
 
-export default  function Index({fromServer, type, loading}) {
+export default  function Index({fromServer, type}) {
   const [tasks, setTasks] = useState(fromServer)
   const [category, setCategory] = useState(type)
   const [load, setLoad] = useState(false)
+  const [depart, setDepart] = useState('1')
+
+  const clickButton = () => {
+    console.log("TEXT1", address + 'task/sajeon/' + depart)
+  }
+
+  const onChange = (e) => {
+    console.log('e', e.target.value)
+    setDepart(e.target.value)
+  }
 
   return (
-    <Grid container columnSpacing={1} rowSpacing={1}>
-      {tasks.map((taskType) => (
-        taskType.items.map((task)=> (
-          <Grid item xs={4}>
-          <SajeonTask task={task}></SajeonTask>
-          </Grid>))
-    ))}
-    </Grid>
+    <div>
+      <input id="part" onChange={onChange} key='input'></input><Button onClick={clickButton} key='button'><Link href={ frontAddress + 'task/sajeon/' + depart}>Search</Link></Button>
+      <Grid container columnSpacing={1} rowSpacing={1} key='grid'>
+        {tasks.map((taskType) => (
+          taskType.items.map((task)=> (
+            <Grid item xs={4} key={task.refNo}>
+            <SajeonTask task={task}></SajeonTask>
+            </Grid>))
+      ))}
+      </Grid>
+    </div>
+
   )
 }
 

@@ -25,9 +25,6 @@ export default function Header() {
             <Typography variant="h10" component="div" sx={{ flexGrow: 0.05 }} key='test'>
                 <Link href="http://localhost:3000/task/" key='ltest'>test</Link>
             </Typography>
-            <div>
-            <Input></Input>
-        </div>
         </Toolbar>
     </AppBar>
     </Box>
