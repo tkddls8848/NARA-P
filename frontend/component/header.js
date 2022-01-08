@@ -23,7 +23,7 @@ export default function Header() {
                 <Link href="http://localhost:3000/task/bone"  key='lbo'>본공고</Link>
             </Typography>
             <Typography variant="h10" component="div" sx={{ flexGrow: 0.05 }} key='test'>
-                <Link href="http://localhost:3000/task/" key='ltest'>test</Link>
+                <Link href="http://localhost:3000/task/test/" key='ltest'>테스트페이지</Link>
             </Typography>
         </Toolbar>
     </AppBar>

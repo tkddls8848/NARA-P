@@ -14,7 +14,6 @@ const SajeonTask = ({task}) => {
             <Typography component='div' key={task.rcptDt}>접수등록 : {task.rcptDt}</Typography>
             <Typography component='div' key={task.opninRgstClseDt}>마감 : {task.opninRgstClseDt}</Typography>
             <Typography component='div' key={task.bfSpecRgstNo}>배정예산 : {task.bfSpecRgstNo.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Typography>
-
           </CardContent>
         </Card>
   )

@@ -1,10 +1,11 @@
 import SajeonTask from '../../../component/sajeonTask'
+import SearchBar from '../../../component/searchBar'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Link, Grid, Button } from '@mui/material'
 
-const address = 'http://localhost:5000/'
-const frontAddress = 'http://localhost:3000/'
+const address = 'http://localhost:5000'
+const frontAddress = 'http://localhost:3000'
 
 export default  function Index({fromServer, type}) {
   const [tasks, setTasks] = useState(fromServer)
@@ -13,7 +14,7 @@ export default  function Index({fromServer, type}) {
   const [depart, setDepart] = useState('1')
 
   const clickButton = () => {
-    console.log("TEXT1", address + 'task/sajeon/' + depart)
+    console.log("TEXT1", address + '/task/sajeon/' + depart)
   }
 
   const onChange = (e) => {
@@ -23,7 +24,7 @@ export default  function Index({fromServer, type}) {
 
   return (
     <div>
-      <input id="part" onChange={onChange} key='input'></input><Button onClick={clickButton} key='button'><Link href={ frontAddress + 'task/sajeon/' + depart}>Search</Link></Button>
+      <SearchBar address={frontAddress} type={type}></SearchBar>
       <Grid container columnSpacing={1} rowSpacing={1} key='grid'>
         {tasks.map((taskType) => (
           taskType.items.map((task)=> (
@@ -40,7 +41,7 @@ export default  function Index({fromServer, type}) {
 export const getServerSideProps = async (depart) => {
   console.log("depart",depart.query.departname)
   const query = encodeURI(depart.query.departname)
-  let fromServer = await axios.get(address+'task/sajeon/' + query)
+  let fromServer = await axios.get(address+'/task/sajeon/' + query)
   const type = Object.keys(fromServer.data)
   fromServer = fromServer.data[type]
 
