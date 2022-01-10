@@ -1,6 +1,15 @@
-# 나라장터 API기반 사업 검색 사이트 프로젝트
+# 나라장터 API기반 사업 검색 사이트 Nara-P
 
 >NextJS, NodeJS로 구현한 나라장터 사전공고 및 본공고 검색사이트입니다.
+
+작업기간 : 22.01.04 ~ 22.01.10
+
+**[서비스 사이트 링크](http://15.164.66.139:3000/)**
+
+**기술스택**
+  - Front-End : React + NextJS
+  - Back-End : NodeJS + express
+  - Data API : [나라장터 공개 API 활용](https://www.data.go.kr/index.do)
 
 **URL**
   - / : 페이지 홈
@@ -10,6 +19,6 @@
   - task/bone/(기관명) : 검색 기관의 검색일 기준 2주간에 대한 본공고 검색 결과 출력
 
 **버전정보**
-  - version 0.1 : 기본적 기능 구현 완료
-  - version 0.2 : 사이트 URL 라우팅 구현
+* version 1.0
+  - 사이트 AWS EC2 인스턴스 배포 완료 & 서비스 개시 (22.01.10)
 
