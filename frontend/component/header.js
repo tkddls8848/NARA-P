@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 export default function Header() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} key="Header_Box">
     <AppBar position="static" key='Appbar'>
         <Toolbar key='Toolbar'>
             <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }} key='IconButton'>

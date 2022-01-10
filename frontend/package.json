@@ -2,10 +2,9 @@
   "name": "frontend",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "concurrently \"npm run dev:front\" \"npm run dev:back\"",
+    "dev:front": "next dev",
+    "dev:back": "cd.. && cd backend && npm start"
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -16,11 +15,17 @@
     "@mui/x-data-grid": "^5.2.1",
     "@mui/x-data-grid-generator": "^5.2.1",
     "axios": "^0.24.0",
+    "concurrently": "^7.0.0",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "dotenv-webpack": "^7.0.3",
+    "express": "^4.17.2",
+    "moment": "^2.29.1",
     "next": "12.0.7",
+    "nodemon": "^2.0.15",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "urlencode": "^1.1.0"
   },
   "devDependencies": {
     "eslint": "8.6.0",
