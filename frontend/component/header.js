@@ -18,16 +18,16 @@ export default function Header() {
                 <MenuIcon/>
             </IconButton>
             <Typography variant="h10" component="div" sx={{ flexGrow: 0.05 }} key='home'>
-                <Link href={frontUrl}>홈</Link>
+                <Link href={frontUrl}><a>홈</a></Link>
             </Typography>
             <Typography variant="h10" component="div" sx={{ flexGrow: 0.05 }}  key='sa'>
-                <Link href={frontUrl+'/task/sajeon'} key='lsa'>사전공고</Link>
+                <Link href={frontUrl+'/task/sajeon'}><a>사전공고</a></Link>
             </Typography>
             <Typography variant="h10" component="div" sx={{ flexGrow: 0.05 }} key='bo'>
-                <Link href={frontUrl+'/task/bone'}  key='lbo'>본공고</Link>
+                <Link href={frontUrl+'/task/bone'}  key='lbo'><a>본공고</a></Link>
             </Typography>
             <Typography variant="h10" component="div" sx={{ flexGrow: 0.05 }} key='test'>
-                <Link href={frontUrl+'/task/test'}  key='ltest'>테스트페이지</Link>
+                <Link href={frontUrl+'/task/test'}  key='ltest'><a>테스트페이지</a></Link>
             </Typography>
         </Toolbar>
     </AppBar>
