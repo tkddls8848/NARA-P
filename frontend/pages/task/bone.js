@@ -2,7 +2,7 @@ import BoneTask from '../../component/boneTask'
 import SearchBar from '../../component/searchBar'
 import axios from 'axios'
 import { useState } from 'react'
-import { Link, Button, Grid } from '@mui/material'
+import { Grid } from '@mui/material'
 
 const backAddress = process.env.BACK_URL
 const frontAddress = process.env.FRONT_URL
@@ -28,7 +28,7 @@ export default  function Index({fromServer, type}) {
       <Grid container columnSpacing={1} rowSpacing={1}>
         {tasks.map((taskType) => (
           taskType.items.map((task)=> (
-            <Grid item xs={4} key={task.bidNtceNo}>
+          <Grid item xs={4} key={task.bidNtceNm}>
             <BoneTask task={task}></BoneTask>
           </Grid>))
         ))}

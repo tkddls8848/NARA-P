@@ -1,36 +1,46 @@
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
-import MenuIcon from '@mui/icons-material/Menu'
-import { Input, Toolbar, Typography } from '@mui/material'
-import IconButton from '@mui/material/IconButton'
-import Link from 'next/link'
-
+import { Button, Toolbar, Typography } from '@mui/material'
+import { useRouter } from 'next/router'
 
 export default function Header() {
 
-    const frontUrl = process.env.FRONT_URL
+    const menus = ["홈","사전공고","본공고","테스트"]
+    const router = useRouter()
 
-  return (
-    <Box sx={{ flexGrow: 1 }} key="Header_Box">
-    <AppBar position="static" key='Appbar'>
-        <Toolbar key='Toolbar'>
-            <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }} key='IconButton'>
-                <MenuIcon/>
-            </IconButton>
-            <Typography variant="h10" component="div" sx={{ flexGrow: 0.05 }} key='home'>
-                <Link href={frontUrl}><a>홈</a></Link>
-            </Typography>
-            <Typography variant="h10" component="div" sx={{ flexGrow: 0.05 }}  key='sa'>
-                <Link href={frontUrl+'/task/sajeon'}><a>사전공고</a></Link>
-            </Typography>
-            <Typography variant="h10" component="div" sx={{ flexGrow: 0.05 }} key='bo'>
-                <Link href={frontUrl+'/task/bone'}  key='lbo'><a>본공고</a></Link>
-            </Typography>
-            <Typography variant="h10" component="div" sx={{ flexGrow: 0.05 }} key='test'>
-                <Link href={frontUrl+'/task/test'}  key='ltest'><a>테스트페이지</a></Link>
-            </Typography>
-        </Toolbar>
-    </AppBar>
-    </Box>
+    const menuClick = (e) => {
+        const type = e.target.id
+        console.log(type)
+        switch (type) {
+            case menus[0]:
+                router.push('/')
+                break
+            case menus[1]:
+                router.push('/task/sajeon')
+                break
+            case menus[2]:
+                router.push('/task/bone')
+                break
+            case menus[3]:
+                router.push('/task/test')
+                break
+            default:
+                console.log("NOT MENU")
+        }
+    }
+
+    return (
+        <Box sx={{ flexGrow: 1 }} key="Header_Box">
+            <AppBar position="static" key='Appbar'>
+                <Toolbar key='Toolbar'>
+                    <Typography variant="h5" component="div" sx={{ flexGrow: 0.05 }} key='home'>
+                        NARA-P
+                    </Typography>
+                        {menus.map((menu) => (
+                            <Button variant='contained' onClick={menuClick} id={menu} key={menu}  disableElevation>{menu}</Button>
+                        ))}
+                </Toolbar>
+            </AppBar>
+        </Box>
   )
 }
