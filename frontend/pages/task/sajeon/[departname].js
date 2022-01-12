@@ -4,8 +4,8 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Link, Grid, Button } from '@mui/material'
 
-const address = 'http://localhost:5000'
-const frontAddress = 'http://localhost:3000'
+const backAddress = process.env.BACK_URL
+const frontAddress = process.env.FRONT_URL
 
 export default  function Index({fromServer, type}) {
   const [tasks, setTasks] = useState(fromServer)
@@ -41,7 +41,7 @@ export default  function Index({fromServer, type}) {
 export const getServerSideProps = async (depart) => {
   console.log("depart",depart.query.departname)
   const query = encodeURI(depart.query.departname)
-  let fromServer = await axios.get(address+'/task/sajeon/' + query)
+  let fromServer = await axios.get(backAddress+'/task/sajeon/' + query)
   const type = Object.keys(fromServer.data)
   fromServer = fromServer.data[type]
 
