@@ -6,7 +6,7 @@ const cors = require('cors')
 const moment = require('moment')
 
 const today = moment().format('YYYYMMDD0000')
-const yesterday = moment().subtract(14, 'days').format('YYYYMMDD0000')
+const yesterday = moment().subtract(7, 'days').format('YYYYMMDD0000')
 const serviceKey = process.env.SERVICE_KEY
 const datasize = 'numOfRows=20&pageNo=1'
 const date = 'inqryBgnDt='+ yesterday +'&inqryEndDt=' + today
