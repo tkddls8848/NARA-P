@@ -10,7 +10,7 @@ const SajeonTask = ({task}) => {
           <CardContent>
             <Typography component='div' key={task.bsnsDivNm}>유형 : {task.bsnsDivNm}</Typography>
             <Typography component='div' key={task.rlDminsttNm}>기관명 : {task.rlDminsttNm}</Typography>
-            <Typography component='div' key={task.prdctClsfcNoNm}>사업명 : {task.prdctClsfcNoNm}</Typography>
+            <Typography component='div' key={task.prdctClsfcNoNm}>사업명 : {task.prdctClsfcNoNm.slice(0,20)}</Typography>
             <Typography component='div' key={task.rcptDt}>접수등록 : {task.rcptDt}</Typography>
             <Typography component='div' key={task.opninRgstClseDt}>마감 : {task.opninRgstClseDt}</Typography>
             <Typography component='div' key={task.bfSpecRgstNo}>배정예산 : {task.bfSpecRgstNo.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Typography>
