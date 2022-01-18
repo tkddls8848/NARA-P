@@ -15,6 +15,7 @@ export default  function Index() {
     <div>
       <button onClick={onClick}>TEST Button</button>
       {[data]}
+
     </div>
   )
 }

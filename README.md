@@ -25,6 +25,5 @@
   - Google Search Console 등록
 
 **추후 개선 필요**
-- 로딩 창
 - https
 - 검색 다양화(날짜 설정 및 여러 기관 동시 검색)
