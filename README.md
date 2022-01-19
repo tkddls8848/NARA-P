@@ -1,6 +1,6 @@
-# 나라장터 API기반 사업 검색 사이트 Nara-P
+# 나라장터 API기반 사업 검색 사이트 NARA-P
 
->NextJS, NodeJS로 구현한 나라장터 사전공고 및 본공고 검색사이트입니다.
+>ReactJS+NextJS, NodeJS+Express로 구현한 나라장터 사전공고 및 본공고 검색사이트입니다.
 
 작업기간 : 22.01.04 ~ 22.01.10
 
