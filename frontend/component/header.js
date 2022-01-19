@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 export default function Header() {
 
-    const menus = ["홈","사전공고","본공고","테스트"]
+    const menus = ["홈","사전공고","본공고"]
     const router = useRouter()
 
     const menuClick = (e) => {
@@ -20,9 +20,6 @@ export default function Header() {
                 break
             case menus[2]:
                 router.push('/task/bone')
-                break
-            case menus[3]:
-                router.push('/task/test')
                 break
             default:
                 console.log("NOT MENU")

@@ -1,21 +1,28 @@
 import axios from 'axios'
 import {  useState } from 'react'
+import SearchBar from '../component/searchBar'
+
+const backAddress = process.env.BACK_URL
+const frontAddress = process.env.FRONT_URL
 
 export default  function Index() {
   const [data, setData] = useState()
-  const [category, setCategory] = useState()
-  const [departname, setDepartname] = useState(process.env.FRONT_URL)
-  console.log(departname)
+  const [depart, setDepart] = useState('1')
+  const [type, setType] = useState('sajeon')
 
-  const onClick = async () => {
+  const onChange = (e) => {
+    console.log('e', e.target.value)
+    setDepart(e.target.value)
+  }
+
+  const onClick = () => {
     setData(process.env.FRONT_URL)
+    console.log(data)
   }
 
   return (
     <div>
-      <button onClick={onClick}>TEST Button</button>
-      {[data]}
-
+      <SearchBar address={frontAddress} type={type}></SearchBar>
     </div>
   )
 }

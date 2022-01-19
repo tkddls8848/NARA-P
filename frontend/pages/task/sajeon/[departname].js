@@ -12,6 +12,7 @@ export default  function Index({fromServer, type}) {
   const [category, setCategory] = useState(type)
   const [load, setLoad] = useState(false)
   const [depart, setDepart] = useState('1')
+  const [isdata, setIsdata] = useState(true)
 
   const clickButton = () => {
     console.log("TEXT1", address + '/task/sajeon/' + depart)
@@ -22,19 +23,29 @@ export default  function Index({fromServer, type}) {
     setDepart(e.target.value)
   }
 
+  useEffect(() => {
+    if(tasks.length == 0) {
+      setIsdata(false)
+    }
+  }, [])
+
   return (
     <div>
       <SearchBar address={frontAddress} type={type}></SearchBar>
+      {isdata 
+      ? 
       <Grid container columnSpacing={1} rowSpacing={1} key='grid'>
         {tasks.map((taskType) => (
           taskType.items.map((task)=> (
-            <Grid item xs={4} key={task.refNo}>
+          <Grid item xs={4} key={task.refNo}>
             <SajeonTask task={task}></SajeonTask>
-            </Grid>))
-      ))}
+          </Grid>))
+        ))}
       </Grid>
+      :
+      <div>No data</div>
+       }
     </div>
-
   )
 }
 
