@@ -1,8 +1,6 @@
-import Link from 'next/link'
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import { Box } from '@mui/material';
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import { Typography, Link } from '@mui/material'
 
 const SajeonTask = ({task}) => {
   return (
@@ -14,6 +12,7 @@ const SajeonTask = ({task}) => {
             <Typography component='div' key={task.rcptDt}>접수등록 : {task.rcptDt}</Typography>
             <Typography component='div' key={task.opninRgstClseDt}>마감 : {task.opninRgstClseDt}</Typography>
             <Typography component='div' key={task.bfSpecRgstNo}>배정예산 : {task.bfSpecRgstNo.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Typography>
+            <Typography component='div' key={task.specDocFileUrl1}>다운로드1 : <Link underline='hover' href={task.specDocFileUrl1}>다운로드</Link></Typography>
           </CardContent>
         </Card>
   )
