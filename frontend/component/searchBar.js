@@ -1,4 +1,4 @@
-import { Button, Link, TextField } from "@mui/material"
+import { Button, TextField } from "@mui/material"
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -13,17 +13,12 @@ const SearchBar = ({address}) => {
     const router = useRouter()
 
     const ChangeRadio = (e) => {
-        console.log('radio', e.target.value)
         setRadioType(e.target.value)
     }
-
     const ChangeInput = (e) => {
-        console.log('searchBar', e.target.value)
         setDepartName(e.target.value)
     }
-
     const ButtonClick = (e) => {
-        console.log("Button", e.target.value)
         router.push(host + '/task/' + radioType + '/' + departName)
     }
 
@@ -35,7 +30,7 @@ const SearchBar = ({address}) => {
                     <FormControlLabel value="bone" control={<Radio size="small"/>} label="본공고" />
                 </RadioGroup>
             </FormControl>
-            <TextField label="Search" variant="outlined" id="part" onChange={ChangeInput} key='input'></TextField>
+            <TextField label="Search" variant="standard" id="part" onChange={ChangeInput} key='input'></TextField>
             <Button key='button' variant="outlined" onClick={ButtonClick}>Search</Button>
         </div>
     )

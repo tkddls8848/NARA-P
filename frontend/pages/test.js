@@ -22,8 +22,8 @@ export default  function Index() {
 
   return (
     <div>
-      <div>TEST</div>
       <SearchBar address={frontAddress} type={type}></SearchBar>
+      <div>TEST</div>
     </div>
   )
 }

@@ -9,19 +9,7 @@ const frontAddress = process.env.FRONT_URL
 
 export default  function Index({fromServer, type}) {
   const [tasks, setTasks] = useState(fromServer)
-  const [category, setCategory] = useState(type)
-  const [load, setLoad] = useState(false)
-  const [depart, setDepart] = useState('1')
   const [isdata, setIsdata] = useState(true)
-
-  const clickButton = () => {
-    console.log("TEXT1", address + '/task/sajeon/' + depart)
-  }
-
-  const onChange = (e) => {
-    console.log('e', e.target.value)
-    setDepart(e.target.value)
-  }
 
   useEffect(() => {
     if(tasks.length == 0) {
@@ -31,7 +19,7 @@ export default  function Index({fromServer, type}) {
 
   return (
     <div>
-      <SearchBar address={frontAddress} type={type}></SearchBar>
+      <SearchBar address={frontAddress}></SearchBar>
       {isdata 
       ? 
       <Grid container columnSpacing={1} rowSpacing={1} key='grid'>

@@ -1,11 +1,9 @@
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import { Button, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 
 export default function Header() {
 
-    const menus = ["홈","사전공고","본공고"]
+    const menus = ["홈","공고검색","TEST"]
     const router = useRouter()
 
     const menuClick = (e) => {
@@ -16,10 +14,10 @@ export default function Header() {
                 router.push('/')
                 break
             case menus[1]:
-                router.push('/task/sajeon')
+                router.push('/task/naraSearch')
                 break
             case menus[2]:
-                router.push('/task/bone')
+                router.push('/test')
                 break
             default:
                 console.log("NOT MENU")
