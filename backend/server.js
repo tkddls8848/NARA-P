@@ -177,7 +177,23 @@ app.get('/task/bone/', (req, res) => {
     getData(api + '||' + api1 + '||' + api2)
 })
 
+const Data = require('./dataModel')
+const mongoose = require('mongoose')
+const url = process.env.MONGO_URL
+
+mongoose.connect(url).then(() => {
+        console.log("MONGO CONNECT")
+    }).catch((err) => {
+    console.log("MONGO ERR", err)
+    })
+
 app.get('/test', (req, res) => {
-    console.log("TEST BACK")
-    res.json({'TEST': 'this is test'})
+    Data.find({}).exec((err, data) => {
+        if(err) {
+            res.send('error')
+        } else {
+            console.log(data)
+            res.json(data)
+        }
+    })
 })
