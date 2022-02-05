@@ -41,16 +41,19 @@ app.get('/task/sajeon', (req, res) => {
         .then(axios.spread((result, result1, result2) => {
             if (result.data.response.body.totalCount != 0) {
                 for(let i = 0 ; i < result.data.response.body.items.length ; i++){
+                    result.data.response.body.items[i].isNew = false
                     dataSet.push(result.data.response.body.items[i])
                 }                
             }
             if (result1.data.response.body.totalCount != 0) {
                 for(let i = 0 ; i < result1.data.response.body.items.length ; i++){
+                    result1.data.response.body.items[i].isNew = false
                     dataSet.push(result1.data.response.body.items[i])
                 }                
             }
             if (result2.data.response.body.totalCount != 0) {
                 for(let i = 0 ; i < result2.data.response.body.items.length ; i++){
+                    result2.data.response.body.items[i].isNew = false
                     dataSet.push(result2.data.response.body.items[i])
                 }                
             }
@@ -80,16 +83,19 @@ app.get('/task/sajeon/:departname', (req, res) => {
         .then(axios.spread((result, result1, result2) => {
             if (result.data.response.body.totalCount != 0) {
                 for(let i = 0 ; i < result.data.response.body.items.length ; i++){
+                    result.data.response.body.items[i].isNew = false
                     dataSet.push(result.data.response.body.items[i])
                 }                
             }
             if (result1.data.response.body.totalCount != 0) {
                 for(let i = 0 ; i < result1.data.response.body.items.length ; i++){
+                    result1.data.response.body.items[i].isNew = false
                     dataSet.push(result1.data.response.body.items[i])
                 }                
             }
             if (result2.data.response.body.totalCount != 0) {
                 for(let i = 0 ; i < result2.data.response.body.items.length ; i++){
+                    result2.data.response.body.items[i].isNew = false
                     dataSet.push(result2.data.response.body.items[i])
                 }                
             }
@@ -120,16 +126,19 @@ app.get('/task/bone', (req, res) => {
         .then(axios.spread((result, result1, result2) => {
             if (result.data.response.body.totalCount != 0) {
                 for(let i = 0 ; i < result.data.response.body.items.length ; i++){
+                    result.data.response.body.items[i].isNew = false
                     dataSet.push(result.data.response.body.items[i])
                 }                
             }
             if (result1.data.response.body.totalCount != 0) {
                 for(let i = 0 ; i < result1.data.response.body.items.length ; i++){
+                    result1.data.response.body.items[i].isNew = false
                     dataSet.push(result1.data.response.body.items[i])
                 }                
             }
             if (result2.data.response.body.totalCount != 0) {
                 for(let i = 0 ; i < result2.data.response.body.items.length ; i++){
+                    result2.data.response.body.items[i].isNew = false
                     dataSet.push(result2.data.response.body.items[i])
                 }                
             }
@@ -159,16 +168,19 @@ app.get('/task/bone/:departname', (req, res) => {
         .then(axios.spread((result, result1, result2) => {
             if (result.data.response.body.totalCount != 0) {
                 for(let i = 0 ; i < result.data.response.body.items.length ; i++){
+                    result.data.response.body.items[i].isNew = false
                     dataSet.push(result.data.response.body.items[i])
                 }                
             }
             if (result1.data.response.body.totalCount != 0) {
                 for(let i = 0 ; i < result1.data.response.body.items.length ; i++){
+                    result1.data.response.body.items[i].isNew = false
                     dataSet.push(result1.data.response.body.items[i])
                 }                
             }
             if (result2.data.response.body.totalCount != 0) {
                 for(let i = 0 ; i < result2.data.response.body.items.length ; i++){
+                    result2.data.response.body.items[i].isNew = false
                     dataSet.push(result2.data.response.body.items[i])
                 }                
             }

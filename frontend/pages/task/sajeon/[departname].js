@@ -2,13 +2,13 @@ import SajeonTask from '../../../component/sajeonTask'
 import SearchBar from '../../../component/searchBar'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { Link, Grid, Button } from '@mui/material'
+import { Grid } from '@mui/material'
 
 const backAddress = process.env.BACK_URL
 const frontAddress = process.env.FRONT_URL
 
-export default  function Index({fromServer, type}) {
-  const [tasks, setTasks] = useState(fromServer)
+export default  function sajeonComponent({toServer}) {
+  const [tasks, setTasks] = useState(toServer)
   const [isdata, setIsdata] = useState(true)
 
   useEffect(() => {
@@ -23,12 +23,10 @@ export default  function Index({fromServer, type}) {
       {isdata 
       ? 
       <Grid container columnSpacing={1} rowSpacing={1} key='grid'>
-        {tasks.map((taskType) => (
-          taskType.items.map((task)=> (
+        {tasks.map((task)=> (
           <Grid item xs={4} key={task.refNo}>
             <SajeonTask task={task}></SajeonTask>
-          </Grid>))
-        ))}
+          </Grid>))}
       </Grid>
       :
       <div>No data</div>
@@ -38,19 +36,15 @@ export default  function Index({fromServer, type}) {
 }
 
 export const getServerSideProps = async (depart) => {
-  console.log("depart",depart.query.departname)
   const query = encodeURI(depart.query.departname)
   let fromServer = await axios.get(backAddress+'/task/sajeon/' + query)
-  const type = Object.keys(fromServer.data)
-  fromServer = fromServer.data[type]
+  const toServer = fromServer.data
 
-  console.log("Ftype",type)
-  console.log("Fdata",fromServer)
+  console.log("Fdata",toServer)
 
   return {
     props: {
-      fromServer,
-      type
+      toServer
     }
   }
 }

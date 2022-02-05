@@ -8,7 +8,7 @@ import { useRouter } from "next/router"
 
 const SearchBar = ({address}) => {
     const host = address
-    const [departName, setDepartName] = useState('initialState')    
+    const [departName, setDepartName] = useState('NONE')    
     const [radioType, setRadioType] = useState('sajeon')
     const router = useRouter()
 
