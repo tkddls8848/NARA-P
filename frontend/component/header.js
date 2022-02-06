@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 export default function Header() {
 
-    const menus = ["홈","공고검색","TEST"]
+    const menus = ["홈","공고검색"]
     const router = useRouter()
 
     const menuClick = (e) => {
@@ -15,9 +15,6 @@ export default function Header() {
                 break
             case menus[1]:
                 router.push('/task/naraSearch')
-                break
-            case menus[2]:
-                router.push('/test')
                 break
             default:
                 console.log("NOT MENU")

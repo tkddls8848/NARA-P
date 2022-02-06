@@ -25,7 +25,7 @@ const SearchBar = ({address}) => {
     return (
         <div style={{padding: 10}}>
             <FormControl>
-                <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" onChange={ChangeRadio}>
+                <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" defaultValue="sajeon" onChange={ChangeRadio}>
                     <FormControlLabel value="sajeon" control={<Radio size="small"/>} label="사전공고" />
                     <FormControlLabel value="bone" control={<Radio size="small"/>} label="본공고" />
                 </RadioGroup>

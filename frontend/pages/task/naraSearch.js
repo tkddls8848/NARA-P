@@ -1,15 +1,10 @@
-import SajeonTask from '../../component/sajeonTask'
 import SearchBar from '../../component/searchBar'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { Grid } from '@mui/material'
+import { useState } from 'react'
 
 const backAddress = process.env.BACK_URL
 const frontAddress = process.env.FRONT_URL
 
-export default  function Index({fromServer, type}) {
-  const [tasks, setTasks] = useState(fromServer)
-
+export default  function Index() {  
   return (
     <div>
       <SearchBar address={frontAddress}></SearchBar>

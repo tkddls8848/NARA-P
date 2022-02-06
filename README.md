@@ -1,6 +1,6 @@
 # 나라장터 API기반 사업 검색 사이트 NARA-P
 
->ReactJS+NextJS, NodeJS+Express로 구현한 나라장터 사전공고 및 본공고 검색사이트입니다.
+>MERN(Mongo, Express, React, NodeJS) 스택으로 구현한 나라장터 사전공고 및 본공고 검색사이트입니다.
 
 작업기간 : 22.01.04 ~ 22.01.10
 
@@ -8,14 +8,15 @@
 
 **기술스택**
   - Front-End : React + NextJS
-  - Back-End : NodeJS + express
+  - Back-End : NodeJS + Express
   - Data API : [나라장터 공개 API 활용](https://www.data.go.kr/index.do)
+  - Database : Mongoose(구성 중)
+  - DevOps : AWS, docker(구성 중)
 
 **URL**
   - / : 페이지 홈
-  - task/sajeon/ : 국민건강보험공단 검색일 기준 1주간에 대한 사전공고 검색 결과 출력
+  - task/naraSearch : 검색 홈
   - task/sajeon/(기관명) : 검색 기관의 검색일 기준 1주간에 대한 사전공고 검색 결과 출력
-  - task/bone/ : 국민건강보험공단 검색일 기준 1주간에 대한 본공고 검색 결과 출력
   - task/bone/(기관명) : 검색 기관의 검색일 기준 1주간에 대한 본공고 검색 결과 출력
 
 **버전정보**
@@ -24,8 +25,13 @@
   - 사이트 custom markup page 기능 구현
   - Google Search Console 등록
 
+* version 1.0.1
+  - 출력 데이터의 시간 순 정렬
+  - 라디오 버튼 서치 제공
+  - 사전/본공고 컴포넌트 일원화
+
 **추후 개선 필요**
 - https
 - 검색 다양화(날짜 설정 및 여러 기관 동시 검색)
-- 사전/본공고 라디오 버튼 서치
+- 선택적 데이터 호출(나라장터 API + Mongoose)
 - 404 페이지

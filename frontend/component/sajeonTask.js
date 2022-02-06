@@ -7,7 +7,6 @@ const SajeonTask = ({task}) => {
   if(!task.isNew){
     flag = "Not new"
   }
-
   return (
         <Card variant='outlined'>
           <CardContent>

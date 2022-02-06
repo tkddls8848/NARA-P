@@ -41,7 +41,7 @@ export const getServerSideProps = async (depart) => {
   let fromServer = await axios.get(backAddress+'/task/bone/' + query)
   const toServer = fromServer.data
 
-  console.log("Fdata",toServer)
+  console.log("toServer",toServer)
 
   return {
     props: {

@@ -11,10 +11,10 @@ function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    const routeStart = (url, { shallow }) => {
+    const routeStart = () => {
       setLoading(true)
     }
-    const routeEnd = (url, { shallow }) => {
+    const routeEnd = () => {
       setLoading(false)
     }
     router.events.on('routeChangeStart', routeStart)

@@ -2,7 +2,6 @@ import { Paper, Box } from '@mui/material'
 import { Container, Typography, Link } from '@mui/material'
 
 export default function footer() {
-
   return (
     <Box>
       <Paper sx={{  position: "fixed", height: 0.075, width:1, bottom:0}} elevation={3}>
