@@ -1,30 +1,34 @@
-import axios from 'axios'
-import {  useState } from 'react'
-import SearchBar from '../component/searchBar'
+import * as React from 'react';
+import TextField from '@mui/material/TextField';
+import DateRangePicker from '@mui/lab/DateRangePicker';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import Box from '@mui/material/Box';
+import { useState } from "react"
 
-const backAddress = process.env.BACK_URL
-const frontAddress = process.env.FRONT_URL
+export default function BasicDateRangePicker() {
+  const [dateRange, setDateRange] = useState([null, null])
 
-export default  function Index() {
-  const [data, setData] = useState()
-  const [depart, setDepart] = useState('1')
-  const [type, setType] = useState('sajeon')
 
-  const onChange = (e) => {
-    console.log('e', e.target.value)
-    setDepart(e.target.value)
-  }
-
-  const onClick = () => {
-    setData(process.env.FRONT_URL)
-    console.log(data)
-  }
 
   return (
-    <div>
-      <SearchBar address={frontAddress} type={type}></SearchBar>
-      <div>TEST</div>
-    </div>
-  )
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <DateRangePicker
+        beginDate="beginDate"
+        endDate="endDate"
+        value={dateRange}
+        onChange={(newValues) => {
+          setDateRange(newValues)
+          {console.log(newValues)}
+        }}
+        renderInput={(startProps, endProps) => (
+          <>
+            <TextField {...startProps} />
+            <Box sx={{ mx: 2 }}> to </Box>
+            <TextField {...endProps} />
+          </>
+        )}
+      />
+    </LocalizationProvider>
+  );
 }
-

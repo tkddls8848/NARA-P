@@ -7,11 +7,12 @@
     "dev:back": "cd.. && cd backend && npm start"
   },
   "dependencies": {
+    "@date-io/moment": "^2.13.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@material-ui/styles": "^4.11.4",
     "@mui/icons-material": "^5.2.5",
-    "@mui/lab": "^5.0.0-alpha.64",
+    "@mui/lab": "^5.0.0-alpha.67",
     "@mui/material": "^5.2.7",
     "@mui/styles": "^5.2.3",
     "@mui/x-data-grid": "^5.2.1",

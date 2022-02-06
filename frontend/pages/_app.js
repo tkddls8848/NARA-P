@@ -1,10 +1,14 @@
 import '../styles/globals.css'
-import Footer from '../component/footer'
-import Header from '../component/header'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
+import Footer from '../component/footer'
+import Header from '../component/header'
 import Load from '../component/loadPage'
+import AdapterDateFns from '@mui/lab/AdapterDateFns'
+import DateFnsAdapter from '@mui/lab/AdapterDateFns'
+import LocalizationProvider from '@mui/lab/LocalizationProvider'
+import MomentUtils from '@date-io/moment'
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
@@ -27,14 +31,16 @@ function MyApp({ Component, pageProps }) {
   }, [])
 
   return (
-    <>
-      <Head>
+  <>
+    <Head>
       <title>나라장터 검색 웹 페이지</title>
-      </Head>
+    </Head>    
+    <LocalizationProvider dateAdapter={MomentUtils}>
       <Header></Header>
       {loading ? <Load></Load> : <Component {...pageProps}/>}
       <Footer></Footer> 
-    </>
+    </LocalizationProvider>
+  </>
   )
 }
 
