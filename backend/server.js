@@ -9,10 +9,8 @@ const moment = require('moment')
 */
 const beginDate = moment().subtract(7, 'days').format('YYYYMMDD0000')
 const endDate = moment().format('YYYYMMDD0000')
-
 const serviceKey = process.env.SERVICE_KEY
 const datasize = 'numOfRows=999&pageNo=1'
-const date = 'inqryBgnDt='+ beginDate +'&inqryEndDt=' + endDate
 const type = 'type=json'
 
 app.use(express.json())
@@ -29,13 +27,7 @@ app.get('/task/sajeon/:departname', (req, res) => {
     const url2 = 'http://apis.data.go.kr/1230000/HrcspSsstndrdInfoService/getInsttAcctoThngListInfoServc'
     const departname = 'rlDminsttNm=' + encodeURIComponent(req.params.departname)
     // 검색 기간 쿼리 스트링
-    if(req.query.beginDate != undefined) {
-        const beginDate = req.query.beginDate
-    }
-    if(req.query.endDate != undefined) {
-        const endDate = req.query.endDate
-    }
-    const date = 'inqryBgnDt='+ beginDate +'&inqryEndDt=' + endDate
+    const date = 'inqryBgnDt='+ req.query.beginDate +'&inqryEndDt=' + req.query.endDate
 
     const api = (url + "?"+ serviceKey + "&" + datasize + "&" + date + '&' + departname + '&' + type)
     const api1 = (url1 + "?"+ serviceKey + "&" + datasize + "&" + date + '&' + departname + '&' + type)
@@ -51,7 +43,7 @@ app.get('/task/sajeon/:departname', (req, res) => {
     }
 
     getData = async (api) => {
-        const array = api.split('||')       
+        const array = api.split('||')
         await axios.all([axios.get(array[0]), axios.get(array[1]), axios.get(array[2])])
         .then(axios.spread((result, result1, result2) => {
             dataProcess(result)
@@ -73,6 +65,8 @@ app.get('/task/bone/:departname', (req, res) => {
     const url1 = 'http://apis.data.go.kr/1230000/BidPublicInfoService02/getBidPblancListInfoServcPPSSrch'
     const url2 = 'http://apis.data.go.kr/1230000/BidPublicInfoService02/getBidPblancListInfoThngPPSSrch'
     const departname = 'dminsttNm=' + encodeURIComponent(req.params.departname)
+    // 검색 기간 쿼리 스트링
+    const date = 'inqryBgnDt='+ req.query.beginDate +'&inqryEndDt=' + req.query.endDate
 
     const api = (url + "?"+ serviceKey + "&" + datasize + "&inqryDiv=1&" + date + '&' + departname + '&' + type)
     const api1 = (url1 + "?"+ serviceKey + "&" + datasize + "&inqryDiv=1&" + date + '&' + departname + '&' + type)
