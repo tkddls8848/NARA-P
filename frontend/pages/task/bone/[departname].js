@@ -36,9 +36,11 @@ export default  function boneComponent({toServer}) {
   )
 }
 
-export const getServerSideProps = async (depart) => {
-  const query = encodeURI(depart.query.departname)
-  let fromServer = await axios.get(backAddress+'/task/bone/' + query)
+export const getServerSideProps = async (queryString) => {
+  const pName = encodeURI(queryString.query.departname)
+  const beginDate = queryString.query.beginDate
+  const endDate = queryString.query.endDate
+  let fromServer = await axios.get(backAddress+'/task/bone/' + pName + '?beginDate=' + beginDate + '&endDate=' + endDate)
   const toServer = fromServer.data
 
   console.log("toServer",toServer)

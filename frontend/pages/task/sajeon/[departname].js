@@ -35,9 +35,11 @@ export default  function sajeonComponent({toServer}) {
   )
 }
 
-export const getServerSideProps = async (depart) => {
-  const query = encodeURI(depart.query.departname)
-  let fromServer = await axios.get(backAddress+'/task/sajeon/' + query)
+export const getServerSideProps = async (queryString) => {
+  const pName = encodeURI(queryString.query.departname)
+  const beginDate = queryString.query.beginDate
+  const endDate = queryString.query.endDate
+  let fromServer = await axios.get(backAddress+'/task/sajeon/' + pName + '?beginDate=' + beginDate + '&endDate=' + endDate)
   const toServer = fromServer.data
 
   console.log("toServer",toServer)

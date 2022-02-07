@@ -19,7 +19,9 @@ const SearchBar = ({address}) => {
     const ButtonClick = (e) => {
         console.log("beginDate", dateRange[0].format('YYYYMMDD0000'))
         console.log("endDate", dateRange[1].format('YYYYMMDD0000'))
-        router.push(host + '/task/' + radioType + '/' + departName)
+        const beginDate = dateRange[0].format('YYYYMMDD0000')
+        const endDate = dateRange[1].format('YYYYMMDD0000')
+        router.push(host + '/task/' + radioType + '/' + departName + '?' + 'beginDate' + '=' + beginDate + '&' + 'endDate' + '=' + endDate)
     }
 
     return (
