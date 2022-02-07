@@ -1,34 +1,16 @@
 import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import DateRangePicker from '@mui/lab/DateRangePicker';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import Box from '@mui/material/Box';
-import { useState } from "react"
 
-export default function BasicDateRangePicker() {
-  const [dateRange, setDateRange] = useState([null, null])
-
-
+export default function Test() {
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <DateRangePicker
-        beginDate="beginDate"
-        endDate="endDate"
-        value={dateRange}
-        onChange={(newValues) => {
-          setDateRange(newValues)
-          {console.log(newValues)}
-        }}
-        renderInput={(startProps, endProps) => (
-          <>
-            <TextField {...startProps} />
-            <Box sx={{ mx: 2 }}> to </Box>
-            <TextField {...endProps} />
-          </>
-        )}
-      />
-    </LocalizationProvider>
+  <div>
+    <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex my-4 items-center space-x-4">
+      <div>
+      <div class="border border-indigo-600 ...">asdfasdf</div>
+        <div className="text-xl font-medium text-black">ChitChat</div>
+        <p className="text-slate-500">You have a new message!</p>
+      </div>
+    </div>
+  </div>
   );
 }

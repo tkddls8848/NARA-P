@@ -1,5 +1,4 @@
 import SearchBar from '../../component/searchBar'
-import { useState } from 'react'
 
 const backAddress = process.env.BACK_URL
 const frontAddress = process.env.FRONT_URL

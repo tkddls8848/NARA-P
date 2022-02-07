@@ -1,14 +1,13 @@
-import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material'
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router"
 
-export default function Header() {
+export default function header() {
 
-    const menus = ["홈","공고검색"]
-    const router = useRouter()
+    const router =  useRouter()
+    const menus = ['홈', '검색']
 
-    const menuClick = (e) => {
+    const clickMenus = (e) => {
         const type = e.target.id
-        console.log(type)
+
         switch (type) {
             case menus[0]:
                 router.push('/')
@@ -21,18 +20,12 @@ export default function Header() {
         }
     }
 
-    return (
-        <Box sx={{ flexGrow: 1 }} key="Header_Box">
-            <AppBar position="static" key='Appbar'>
-                <Toolbar key='Toolbar'>
-                    <Typography variant="h5" component="div" sx={{ flexGrow: 0.05 }} key='home'>
-                        NARA-P
-                    </Typography>
-                        {menus.map((menu) => (
-                            <Button variant='contained' onClick={menuClick} id={menu} key={menu}  disableElevation>{menu}</Button>
-                        ))}
-                </Toolbar>
-            </AppBar>
-        </Box>
+  return (
+    <div className="flex space-x-4 items-center flex-wrap bg-blue-500 p-6">
+        <h2 className="text-2xl font-bold text-white">NARA-P</h2>
+        {menus.map((menu) => (
+        <button className="text-2s text-white p-4" id={menu} key={menu} onClick={clickMenus}>{menu}</button>
+        ))}
+    </div>
   )
 }
