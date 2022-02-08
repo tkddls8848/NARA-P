@@ -2,7 +2,6 @@ import BoneTask from '../../../component/boneTask'
 import SearchBar from '../../../component/searchBar'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { Grid } from '@mui/material'
 
 const backAddress = process.env.BACK_URL
 const frontAddress = process.env.FRONT_URL
@@ -22,12 +21,13 @@ export default  function boneComponent({toServer}) {
       <SearchBar address={frontAddress}></SearchBar>
       {isdata 
       ?
-      <Grid container columnSpacing={1} rowSpacing={1} key='grid'>
-        {tasks.map((task)=> (
-          <Grid item xs={4} key={task.bidNtceNo}>
-            <BoneTask task={task}></BoneTask>
-          </Grid>))}
-      </Grid>
+      <div className="h-full w-full grid gap-4 grid-cols-3 grid-rows-3">
+        {tasks.map((task) => (
+          <div key={task.refNo}>
+          <BoneTask task={task}></BoneTask>
+          </div>
+        ))}
+      </div>   
       :
       <div>No data</div>
       }

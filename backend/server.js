@@ -33,7 +33,9 @@ app.get('/task/sajeon/:departname', (req, res) => {
     const api1 = (url1 + "?"+ serviceKey + "&" + datasize + "&" + date + '&' + departname + '&' + type)
     const api2 = (url2 + "?"+ serviceKey + "&" + datasize + "&" + date + '&' + departname + '&' + type)
     let dataSet = []
+
     dataProcess = (result) => {
+        console.log("RESULT", result.data.response.body)
         if (result.data.response.body.totalCount != 0) {
             for(let i = 0 ; i < result.data.response.body.items.length ; i++){
                 result.data.response.body.items[i].isNew = false
@@ -74,6 +76,7 @@ app.get('/task/bone/:departname', (req, res) => {
     let dataSet = []
 
     dataProcess = (result) => {
+        console.log("RESULT", result.data.response.body)
         if (result.data.response.body.totalCount != 0) {
             for(let i = 0 ; i < result.data.response.body.items.length ; i++){
                 result.data.response.body.items[i].isNew = false

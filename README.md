@@ -37,3 +37,5 @@
 - devOps
 - 도메인 네임 적용(www.naraapi.com)
 - 404 페이지
+- Material UI => Tailwind
+- 공고의 개인 CRUD
