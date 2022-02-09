@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "concurrently \"npm run dev:front\" \"npm run dev:back\"",
     "dev:front": "next dev",
-    "dev:back": "cd.. && cd backend && npm start"
+    "dev:back": "cd.. && cd backend && npm start",
+    "build": "next build"
   },
   "dependencies": {
     "axios": "^0.24.0",
@@ -13,12 +14,10 @@
     "dotenv": "^10.0.0",
     "dotenv-webpack": "^7.0.3",
     "express": "^4.17.2",
-    "moment": "^2.29.1",
     "next": "^12.0.10",
     "nodemon": "^2.0.15",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "tw-elements": "^1.0.0-alpha10",
     "urlencode": "^1.1.0"
   },
   "devDependencies": {

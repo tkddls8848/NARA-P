@@ -42,7 +42,11 @@ const SearchBar = ({address}) => {
             router.push(host + '/task/' + radioType + '/' + departName + '?' + 'beginDate' + '=' + beginDate + '&' + 'endDate' + '=' + endDate)
         }        
         //alert이 뜨게하기
-        console.log("CHECKER" , checker, warningMessage)
+        console.log("CHECKER" , checker, warningMessage)        
+    }
+
+    const WarningMessage = (message) => {
+
     }
 
     return (
@@ -84,6 +88,8 @@ const SearchBar = ({address}) => {
                 </button>
             </div>
         </div>
+
+        <div className="text-red-500">Warning Message</div>
     </div>
     )
 }

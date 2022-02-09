@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 
-export default function header() {
+export default function Header() {
 
     const router =  useRouter()
     const menus = ['홈', '검색']

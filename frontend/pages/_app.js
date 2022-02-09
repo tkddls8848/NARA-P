@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Header from '../component/header'
+import Footer from '../component/footer'
 import Load from '../component/loadPage'
 
 function MyApp({ Component, pageProps }) {
@@ -32,6 +33,7 @@ function MyApp({ Component, pageProps }) {
     </Head>    
       <Header></Header>
       {loading ? <Load></Load> : <Component {...pageProps}/>}
+      <Footer></Footer>
   </>
   )
 }

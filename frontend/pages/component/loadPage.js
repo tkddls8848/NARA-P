@@ -1,3 +1,5 @@
+import SearchBar from './searchBar'
+
 const Load = () => {
     return (
         <div>

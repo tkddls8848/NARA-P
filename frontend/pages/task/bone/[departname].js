@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 const backAddress = process.env.BACK_URL
 const frontAddress = process.env.FRONT_URL
 
-export default  function boneComponent({toServer}) {
+export default  function BoneComponent({toServer}) {
   const [tasks, setTasks] = useState(toServer)
   const [isdata, setIsdata] = useState(true)
 
