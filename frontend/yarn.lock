@@ -2014,7 +2014,7 @@
   "resolved" "https://registry.npmjs.org/minimist/-/minimist-1.2.5.tgz"
   "version" "1.2.5"
 
-"moment@^2.10.2", "moment@^2.29.1":
+"moment@^2.10.2":
   "integrity" "sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ=="
   "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.1.tgz"
   "version" "2.29.1"
@@ -2541,7 +2541,7 @@
     "is-core-module" "^2.2.0"
     "path-parse" "^1.0.6"
 
-"resolve@^1.21.0":
+"resolve@^1.22.0":
   "integrity" "sha512-Hhtrw0nLeSrFQ7phPp4OOcVjLPIeMnRlr5mcnVuMe7M/7eBn98A3hmFRLoFo3DLZkivSYwhRUJTyPyWAk56WLw=="
   "resolved" "https://registry.npmjs.org/resolve/-/resolve-1.22.0.tgz"
   "version" "1.22.0"
@@ -2826,10 +2826,10 @@
   "resolved" "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   "version" "1.0.0"
 
-"tailwindcss@^3.0.18", "tailwindcss@^3.0.7":
-  "integrity" "sha512-ihPTpEyA5ANgZbwKlgrbfnzOp9R5vDHFWmqxB1PT8NwOGCOFVVMl+Ps1cQQ369acaqqf1BEF77roCwK0lvNmTw=="
-  "resolved" "https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.0.18.tgz"
-  "version" "3.0.18"
+"tailwindcss@^3.0.19", "tailwindcss@^3.0.7":
+  "integrity" "sha512-rjsdfz/qZya5xQ0OVynEMETgWq1CacmftgMYeXXh6bRM5vxsNwRSbMJsCCIjq/w67om9VP/AFMolOwiE+5VKig=="
+  "resolved" "https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.0.19.tgz"
+  "version" "3.0.19"
   dependencies:
     "arg" "^5.0.1"
     "chalk" "^4.1.2"
@@ -2850,7 +2850,7 @@
     "postcss-selector-parser" "^6.0.9"
     "postcss-value-parser" "^4.2.0"
     "quick-lru" "^5.1.1"
-    "resolve" "^1.21.0"
+    "resolve" "^1.22.0"
 
 "text-table@^0.2.0":
   "integrity" "sha1-f17oI66AUgfACvLfSoTsP8+lcLQ="
