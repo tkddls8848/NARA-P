@@ -2,8 +2,8 @@ import '../styles/globals.css'
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Header from '../component/header'
-import Footer from '../component/footer'
+import Header from '../component/staticComponet/header'
+import Footer from '../component/staticComponet/footer'
 import Load from '../component/loadPage'
 
 function MyApp({ Component, pageProps }) {
@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }) {
       router.events.off('routeChangeStart', routeStart)
       router.events.off('routeChangeComplete', routeEnd)
     }
-  }, [])
+  }, [router])
 
   return (
   <>

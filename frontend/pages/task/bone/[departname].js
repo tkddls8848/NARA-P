@@ -1,4 +1,4 @@
-import BoneTask from '../../../component/boneTask'
+import BoneTask from '../../../component/task/boneTask'
 import SearchBar from '../../../component/searchBar'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
@@ -14,7 +14,7 @@ export default  function BoneComponent({toServer}) {
     if(tasks.length == 0) {
       setIsdata(false)
     }
-  }, [])
+  }, [tasks])
 
   return (
     <div>

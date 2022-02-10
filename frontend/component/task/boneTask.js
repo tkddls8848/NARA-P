@@ -1,10 +1,13 @@
 import Link from "next/link"
 
 const BoneTask = ({task}) => {
-  let flag = 'New'
-  if (!task.isNew) {
-    flag = "Not new"
-  }
+  const [flag, setFlag] = useState('NEW')
+  const isNew = task.isNew
+  
+  useEffect((isNew) => {
+    isNew ? setFlag('NEW') : setFlag('NOT NEW')
+  }, [isNew])
+  
   return (
     <div className="h-full p-4 bg-white rounded-xl shadow-lg flex items-center space-x-3">
       <span className="inline-block align-top">

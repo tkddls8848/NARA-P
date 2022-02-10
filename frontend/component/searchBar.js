@@ -9,7 +9,6 @@ const SearchBar = ({address}) => {
     const router = useRouter()
 
     const ChangeRadio = (e) => {
-        console.log("RADIO", e.target.id)
         setRadioType(e.target.id)
     }
     const ChangeInput = (e) => {
@@ -19,9 +18,35 @@ const SearchBar = ({address}) => {
         //캘린더 양식 적용 전까지 임의로 맞는 날짜 입력 필요
         const beginDate = dateRange[0]
         const endDate = dateRange[1]
-
+        let checker = [false, false, false]
+        let warningMessage = ''
         console.log("BUTTON", radioType, departName, dateRange)
-        router.push(host + '/task/' + radioType + '/' + departName + '?' + 'beginDate' + '=' + beginDate + '&' + 'endDate' + '=' + endDate)
+        if (!radioType) {
+            console.log("NO RADIO")
+            checker[0] = true
+            warningMessage += "NO RADIO "
+        }
+        if (!departName) {
+            console.log("NO INPUT")
+            checker[1] = true
+            warningMessage += "NO INPUT "
+        }
+        if (!dateRange[0] || !dateRange[1]) {
+            console.log("NO RANGE")
+            checker[2] = true
+            warningMessage += "NO RANGE "
+        }
+        if (checker.includes(true)) {
+            console.log("NO ALLOW")
+        } else {
+            router.push(host + '/task/' + radioType + '/' + departName + '?' + 'beginDate' + '=' + beginDate + '&' + 'endDate' + '=' + endDate)
+        }        
+        //alert이 뜨게하기
+        console.log("CHECKER" , checker, warningMessage)        
+    }
+
+    const WarningMessage = (message) => {
+
     }
 
     return (
@@ -63,6 +88,8 @@ const SearchBar = ({address}) => {
                 </button>
             </div>
         </div>
+
+        <div className="text-red-500">Warning Message</div>
     </div>
     )
 }

@@ -21,7 +21,7 @@ app.listen(process.env.PORT, () => {
 })
 
 //사전공고
-app.get('/task/sajeon/:departname', (req, res) => {
+app.get('/api/v1/task/sajeon/:departname', (req, res) => {
     const url = 'http://apis.data.go.kr/1230000/HrcspSsstndrdInfoService/getInsttAcctoThngListInfoThng'
     const url1 = 'http://apis.data.go.kr/1230000/HrcspSsstndrdInfoService/getInsttAcctoThngListInfoCnstwk'
     const url2 = 'http://apis.data.go.kr/1230000/HrcspSsstndrdInfoService/getInsttAcctoThngListInfoServc'
@@ -62,7 +62,7 @@ app.get('/task/sajeon/:departname', (req, res) => {
 })
 
 //본공고
-app.get('/task/bone/:departname', (req, res) => {
+app.get('/api/v1/task/bone/:departname', (req, res) => {
     const url = 'http://apis.data.go.kr/1230000/BidPublicInfoService02/getBidPblancListInfoCnstwkPPSSrch'
     const url1 = 'http://apis.data.go.kr/1230000/BidPublicInfoService02/getBidPblancListInfoServcPPSSrch'
     const url2 = 'http://apis.data.go.kr/1230000/BidPublicInfoService02/getBidPblancListInfoThngPPSSrch'

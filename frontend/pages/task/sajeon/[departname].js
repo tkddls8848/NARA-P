@@ -1,4 +1,4 @@
-import SajeonTask from '../../../component/sajeonTask'
+import SajeonTask from '../../../component/task/sajeonTask'
 import SearchBar from '../../../component/searchBar'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
@@ -14,7 +14,7 @@ export default  function SajeonComponent({toServer}) {
     if(tasks.length == 0) {
       setIsdata(false)
     }
-  }, [])
+  }, [tasks])
 
   return (
     <div>
