@@ -4,11 +4,7 @@ const app = express()
 const dotenv = require('dotenv').config({ path: '../.env' })
 const cors = require('cors')
 const moment = require('moment')
-/*
-각 용역, 물품, 외자 별 numOfRows:20, totalCount가 존재하여 많은 수의 건수 검색을하면 20개의 items 만 나옴
-*/
-const beginDate = moment().subtract(7, 'days').format('YYYYMMDD0000')
-const endDate = moment().format('YYYYMMDD0000')
+
 const serviceKey = process.env.SERVICE_KEY
 const datasize = 'numOfRows=999&pageNo=1'
 const type = 'type=json'
@@ -36,7 +32,7 @@ app.get('/api/v1/task/sajeon/:departname', (req, res) => {
 
     dataProcess = (result) => {
         console.log("RESULT", result.data.response.body)
-        if (result.data.response.body.totalCount != 0) {
+        if (result.data.response.body.totalCount != 0 && !null) {
             for(let i = 0 ; i < result.data.response.body.items.length ; i++){
                 result.data.response.body.items[i].isNew = false
                 dataSet.push(result.data.response.body.items[i])
@@ -77,7 +73,7 @@ app.get('/api/v1/task/bone/:departname', (req, res) => {
 
     dataProcess = (result) => {
         console.log("RESULT", result.data.response.body)
-        if (result.data.response.body.totalCount != 0) {
+        if (result.data.response.body.totalCount != 0 && !null) {
             for(let i = 0 ; i < result.data.response.body.items.length ; i++){
                 result.data.response.body.items[i].isNew = false
                 dataSet.push(result.data.response.body.items[i])
@@ -102,7 +98,7 @@ app.get('/api/v1/task/bone/:departname', (req, res) => {
     getData(api + '||' + api1 + '||' + api2)
 })
 
-const dataModel = require('./models/dataModel')
+const naraDataModel = require('./models/naraDataModel')
 const searchListModel = require('./models/searchListModel')
 const mongoose = require('mongoose')
 const url = process.env.MONGO_URL
@@ -113,8 +109,7 @@ mongoose.connect(url).then(() => {
     console.log("MONGO ERR", err)
     })
 
-app.get('/test', (req, res) => {
-
+app.get('/mongo', (req, res) => {
     searchListModel.find({}, (err, data) => {
         if(err) {
             res.send('error')
@@ -123,4 +118,19 @@ app.get('/test', (req, res) => {
             res.json(data)
         }
     })
+})
+
+app.get('/logintask', (req, res) => {
+    console.log('logintask')
+})
+
+app.post('/logintask', async (req, res) => {
+    //task 1개일 때만 구현됨
+    console.log('logintask_response', req.body)
+    const logintask = new naraDataModel({type: 'logintest', data: req.body})
+    await logintask.save()
+})
+
+app.get('/multisearch', (req, res) => {
+    console.log('multisearch')
 })

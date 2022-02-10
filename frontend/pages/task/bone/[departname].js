@@ -1,5 +1,5 @@
-import BoneTask from '../../../component/task/boneTask'
-import SearchBar from '../../../component/searchBar'
+import BoneTask from '../../component/taskComponent/boneTask'
+import SearchBar from '../../component/searchBar'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 

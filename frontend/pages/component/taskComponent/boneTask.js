@@ -1,13 +1,12 @@
 import Link from "next/link"
 
 const BoneTask = ({task}) => {
-  const [flag, setFlag] = useState('NEW')
   const isNew = task.isNew
-  
-  useEffect((isNew) => {
-    isNew ? setFlag('NEW') : setFlag('NOT NEW')
-  }, [isNew])
-  
+
+  const saveTask = (e) => {
+    console.log("SAVE", e)
+  }
+ 
   return (
     <div className="h-full p-4 bg-white rounded-xl shadow-lg flex items-center space-x-3">
       <span className="inline-block align-top">
@@ -17,7 +16,9 @@ const BoneTask = ({task}) => {
         <p className="text-slate-500" key={task.bidNtceNo + task.bidNtceDt}>접수등록 : {task.bidNtceDt}</p>
         <p className="text-slate-500" key={task.bidNtceNo + task.bidClseDt}>마감 : {task.bidClseDt}</p>
         <p className="text-slate-500" key={task.bidNtceNo + task.ntceSpecDocUrl1}>파일링크1 : <Link underline="hover" href={task.ntceSpecDocUrl1}>다운로드 링크</Link></p>
-        </span>
+        <p className="text-slate-500" key={task.isNew}>최신공고 : {isNew.toString()}</p>
+        <button onClick={() => saveTask(task)}>저장</button>
+      </span>
     </div>
   )
 }

@@ -1,5 +1,5 @@
-import SajeonTask from '../../../component/task/sajeonTask'
-import SearchBar from '../../../component/searchBar'
+import SajeonTask from '../../component/taskComponent/sajeonTask'
+import SearchBar from '../../component/searchBar'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 

@@ -3,10 +3,7 @@ const schema = mongoose.Schema
 
 const dataSchema = new schema({
     type: String,
-    data: {
-        title: String,
-        date: Date
-    }
-})
+    data: Object
+}, {versionKey: false})
 
 module.exports = mongoose.model('naraData' , dataSchema)

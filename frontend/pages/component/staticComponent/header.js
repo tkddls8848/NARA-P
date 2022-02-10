@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 export default function Header() {
 
     const router =  useRouter()
-    const menus = ['홈', '검색']
+    const menus = ['홈', '검색', 'mongo', 'logintasks', '다중 검색 (saved_searchconditions)']
 
     const clickMenus = (e) => {
         const type = e.target.id
@@ -15,6 +15,15 @@ export default function Header() {
             case menus[1]:
                 router.push('/task/naraSearch')
                 break
+            case menus[2]:
+                router.push('/test/mongo')
+                break        
+            case menus[3]:
+                router.push('/test/logintask')
+                break
+            case menus[4]:
+                router.push('/test/multisearch')
+                break         
             default:
                 console.log("NOT MENU")
         }

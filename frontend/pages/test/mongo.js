@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export default function Test() {
+export default function Mongo() {
 
   return (
   <div>
