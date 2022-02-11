@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
 const dataSchema = new schema({
-    type: String,
+    userID: String,
+    taskType: String,
     data: Object
 }, {versionKey: false})
 

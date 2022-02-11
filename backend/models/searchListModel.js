@@ -7,4 +7,4 @@ const searchListSchema = new schema({
     endDate: Date
 }, {versionKey: false})
 
-module.exports = mongoose.model('searchlist', searchListSchema)
+module.exports = mongoose.model('searchlists', searchListSchema)
