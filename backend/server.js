@@ -1,136 +1,31 @@
 const express = require('express')
-const axios = require('axios')
-const app = express()
 const dotenv = require('dotenv').config({ path: '../.env' })
 const cors = require('cors')
-const moment = require('moment')
+const taskRouter = require('./routes/taskRouter')
+const searchRouter = require('./routes/searchRouter')
+const loginRouter = require('./routes/loginRouter')
 
-const serviceKey = process.env.SERVICE_KEY
-const datasize = 'numOfRows=999&pageNo=1'
-const type = 'type=json'
+const app = express()
 
 app.use(express.json())
 app.use(cors())
 app.use(express.urlencoded( {extended : true } ))
+app.use('/api/v1/task', taskRouter)
+app.use('/api/v1/searchList', searchRouter)
+app.use('/api/v1/login', loginRouter)
+
 app.listen(process.env.PORT, () => {
     console.log("SERVER ON")
 })
 
-//사전공고
-app.get('/api/v1/task/sajeon/:departname', (req, res) => {
-    const url = 'http://apis.data.go.kr/1230000/HrcspSsstndrdInfoService/getInsttAcctoThngListInfoThng'
-    const url1 = 'http://apis.data.go.kr/1230000/HrcspSsstndrdInfoService/getInsttAcctoThngListInfoCnstwk'
-    const url2 = 'http://apis.data.go.kr/1230000/HrcspSsstndrdInfoService/getInsttAcctoThngListInfoServc'
-    const departname = 'rlDminsttNm=' + encodeURIComponent(req.params.departname)
-    // 검색 기간 쿼리 스트링
-    const date = 'inqryBgnDt='+ req.query.beginDate +'&inqryEndDt=' + req.query.endDate
-
-    const api = (url + "?"+ serviceKey + "&" + datasize + "&" + date + '&' + departname + '&' + type)
-    const api1 = (url1 + "?"+ serviceKey + "&" + datasize + "&" + date + '&' + departname + '&' + type)
-    const api2 = (url2 + "?"+ serviceKey + "&" + datasize + "&" + date + '&' + departname + '&' + type)
-    let dataSet = []
-
-    dataProcess = (result) => {
-        console.log("RESULT", result.data.response.body)
-        if (result.data.response.body.totalCount != 0 && !null) {
-            for(let i = 0 ; i < result.data.response.body.items.length ; i++){
-                result.data.response.body.items[i].isNew = false
-                dataSet.push(result.data.response.body.items[i])
-            }                
-        }
-    }
-
-    getData = async (api) => {
-        const array = api.split('||')
-        await axios.all([axios.get(array[0]), axios.get(array[1]), axios.get(array[2])])
-        .then(axios.spread((result, result1, result2) => {
-            dataProcess(result)
-            dataProcess(result1)
-            dataProcess(result2)
-            //데이터 공고 게시 날짜 기준 내림차순 정렬
-            dataSet.sort((a, b) => {
-                return a.rcptDt > b.rcptDt ? -1 :  a.rcptDt < b.rcptDt ? 1 : 0
-            })
-            res.send(dataSet)
-       }))
-    }
-    getData(api + '||' + api1 + '||' + api2)
-})
-
-//본공고
-app.get('/api/v1/task/bone/:departname', (req, res) => {
-    const url = 'http://apis.data.go.kr/1230000/BidPublicInfoService02/getBidPblancListInfoCnstwkPPSSrch'
-    const url1 = 'http://apis.data.go.kr/1230000/BidPublicInfoService02/getBidPblancListInfoServcPPSSrch'
-    const url2 = 'http://apis.data.go.kr/1230000/BidPublicInfoService02/getBidPblancListInfoThngPPSSrch'
-    const departname = 'dminsttNm=' + encodeURIComponent(req.params.departname)
-    // 검색 기간 쿼리 스트링
-    const date = 'inqryBgnDt='+ req.query.beginDate +'&inqryEndDt=' + req.query.endDate
-
-    const api = (url + "?"+ serviceKey + "&" + datasize + "&inqryDiv=1&" + date + '&' + departname + '&' + type)
-    const api1 = (url1 + "?"+ serviceKey + "&" + datasize + "&inqryDiv=1&" + date + '&' + departname + '&' + type)
-    const api2 = (url2 + "?"+ serviceKey + "&" + datasize + "&inqryDiv=1&" + date + '&' + departname + '&' + type)
-    let dataSet = []
-
-    dataProcess = (result) => {
-        console.log("RESULT", result.data.response.body)
-        if (result.data.response.body.totalCount != 0 && !null) {
-            for(let i = 0 ; i < result.data.response.body.items.length ; i++){
-                result.data.response.body.items[i].isNew = false
-                dataSet.push(result.data.response.body.items[i])
-            }                
-        }
-    }
-
-    getData = async (api) => {
-        const array = api.split('||')       
-        await axios.all([axios.get(array[0]), axios.get(array[1]), axios.get(array[2])])
-        .then(axios.spread((result, result1, result2) => {
-            dataProcess(result)
-            dataProcess(result1)
-            dataProcess(result2)
-            //데이터 공고 게시 날짜 기준 내림차순 정렬
-            dataSet.sort((a, b) => {
-                return a.bidNtceDt > b.bidNtceDt ? -1 :  a.bidNtceDt < b.bidNtceDt ? 1 : 0
-            })
-            res.send(dataSet)
-       }))
-    }
-    getData(api + '||' + api1 + '||' + api2)
-})
-
-const naraDataModel = require('./models/naraDataModel')
-const searchListModel = require('./models/searchListModel')
-const mongoose = require('mongoose')
-const url = process.env.MONGO_URL
-
-mongoose.connect(url).then(() => {
-        console.log("MONGO CONNECT")
-    }).catch((err) => {
-    console.log("MONGO ERR", err)
-    })
-
-app.get('/mongo', (req, res) => {
-    searchListModel.find({}, (err, data) => {
-        if(err) {
-            res.send('error')
-        } else {
-            console.log(data)
-            res.json(data)
-        }
-    })
-})
-
-app.get('/logintask', (req, res) => {
-    console.log('logintask')
-})
-
-app.post('/logintask', async (req, res) => {
+app.post('/api/v1/logintask', async (req, res) => {
     //task 1개일 때만 구현됨
-    console.log('logintask_response', req.body)
-    const logintask = new naraDataModel({type: 'logintest', data: req.body})
+    //AWS에서 mongodb로 save안됨
+    console.log('logintask_response', req.body, req.body.type)
+    const logintask = new naraDataModel({userID: 'logintest', taskType: req.body.type, data: req.body})
     await logintask.save()
 })
 
-app.get('/multisearch', (req, res) => {
+app.get('/api/v1/multisearch', (req, res) => {
     console.log('multisearch')
 })
