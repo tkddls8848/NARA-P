@@ -3,30 +3,13 @@ import { useRouter } from "next/router"
 export default function Header() {
 
     const router =  useRouter()
-    const menus = ['홈', '검색', 'mongo', 'logintasks', '다중 검색 (saved_searchconditions)']
+    const menus = ['로그인창', '검색', 'TASK CRUD', 'login기능', '다중 검색 매크로', 'ABOUT ME']
+    const urls = ['/', '/task/naraSearch', '/test/searchList', '/test/login', '/test/multisearch', '/test/aboutme']
 
     const clickMenus = (e) => {
         const type = e.target.id
-
-        switch (type) {
-            case menus[0]:
-                router.push('/')
-                break
-            case menus[1]:
-                router.push('/task/naraSearch')
-                break
-            case menus[2]:
-                router.push('/test/mongo')
-                break        
-            case menus[3]:
-                router.push('/test/logintask')
-                break
-            case menus[4]:
-                router.push('/test/multisearch')
-                break         
-            default:
-                console.log("NOT MENU")
-        }
+        const number = menus.indexOf(type)
+        router.push(urls[number])        
     }
 
   return (

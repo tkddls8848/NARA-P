@@ -1,15 +1,15 @@
 import Link from "next/link"
-import {useRouter} from "next/router"
 import axios from 'axios'
+
+const backAddress = process.env.BACK_URL
 
 const SajeonTask = ({task}) => {
   const isNew = task.isNew
-  const router = useRouter()
 
   const saveTask = (e) => {
-    console.log("SAVE", e)
-    axios.post('http://localhost:5000/logintask', e).then((result) => {
-      console.log(result)
+    console.log("SAVE", e, backAddress+'/logintask')
+    axios.post(backAddress + '/logintask', { 'type': 'sajeon', 'data': e }).then((result) => {
+      console.log("RRRR", result)
     }).catch((err) => {
       console.log(err)
     })
@@ -24,7 +24,7 @@ const SajeonTask = ({task}) => {
         <p className="text-slate-500" key={task.opninRgstClseDt}>공고 마감일 : {task.opninRgstClseDt}</p>
         <p className="text-slate-500" key={task.specDocFileUrl1}>다운로드1 : <Link href= {task.specDocFileUrl1}>다운로드</Link></p>
         <p className="text-slate-500" key={task.isNew}>최신공고 : {isNew.toString()}</p>
-        <button onClick={() => saveTask(task)}>저장</button>
+        <button onClick={() => saveTask(task)}>저장(로그인 안되어 있으면 안뜸:미구현)</button>
       </span>
     </div>
   )

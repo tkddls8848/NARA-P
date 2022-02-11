@@ -62,7 +62,7 @@ const SearchBar = ({address}) => {
             <label className="form-check-label inline-block text-gray-800" htmlFor="inlineRadio20">본공고</label>
         </div>
         <div className="border-solid border-2 border-black-500">
-            <input placeholder="search depart" onChange={ChangeInput}></input>
+            <input placeholder="search depart" onKeyUp={ChangeInput}></input>
         </div>
         <div className="flex items-center justify-center">
             <div className="relative form-floating mx-1 xl:w-96">
