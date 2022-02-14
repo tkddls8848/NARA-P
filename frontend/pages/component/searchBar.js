@@ -13,6 +13,7 @@ const SearchBar = ({address}) => {
     }
     const ChangeInput = (e) => {
         setDepartName(e.target.value)
+        console.log(departName)
     }
     const ButtonClick = (e) => {
         //캘린더 양식 적용 전까지 임의로 맞는 날짜 입력 필요

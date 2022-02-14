@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import jwt from 'jsonwebtoken'
 
 const frontAddress = process.env.FRONT_URL
 const backAddress = process.env.BACK_URL
@@ -11,12 +12,12 @@ export default function Delete({data}) {
   const [userId, setUserId] = useState('1234')
   const [userPw, setUserPw] = useState('1234')
   const [userEmail, setUserEmail] = useState('test@test.com')
-  const [userStatus, setUserStatus] = useState('registered user')
+
   const router = useRouter()
 
   const deleteUser = async () => {
     console.log(userId, userPw, userEmail)
-    await axios.delete(backAddress + '/login/delete', {data: {'id': userId}})
+    await axios.delete(backAddress + '/login/delete', {'id': userId})
     router.push('/userLogin/login')
   }
 

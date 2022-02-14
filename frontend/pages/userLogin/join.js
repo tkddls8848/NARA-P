@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 import { useRouter } from "next/router"
+import jwt from 'jsonwebtoken'
 
 const frontAddress = process.env.FRONT_URL
 const backAddress = process.env.BACK_URL
@@ -10,11 +11,10 @@ const Join = () => {
   const [userId, setUserId] = useState('')
   const [userPw, setUserPw] = useState('')
   const [userEmail, setUserEmail] = useState('')
-  const [userStatus, setUserStatus] = useState('not registered user')    
   const router = useRouter()
 
-    const idHandler = (e) => {
-      setUserId(e.target.value)
+    const idHandler = (e) => {     
+      setUserId(e.target.value) 
     }
     const pwHandler = (e) => {
       setUserPw(e.target.value)
@@ -23,8 +23,13 @@ const Join = () => {
       setUserEmail(e.target.value)
     }
     const joinSubmit = async () => {
-      console.log('rrrrrrr')
-      await axios.post(backAddress + '/login/join', {'id': userId, "password": userPw, 'email': userEmail, 'status': 'registered user'})      
+      console.log('rrrrrrr', userId, userPw, userEmail)
+      let data = await axios.post(backAddress + '/login/join', {'id': userId, "password": userPw, 'email': userEmail}, {
+        withCredentials: true
+      })
+      const tmp = data.data
+      const tokendecode = jwt.decode(tmp.token)
+      console.log('tokenCheck', tokendecode)
       router.push(frontAddress + '/userLogin/login')
     }
 
@@ -35,20 +40,20 @@ const Join = () => {
         className='border-solid border-2 border-black' 
         id='id' 
         defaultValue={userId}
-        placeholder='ID' 
-        onKeyUp={(key) => idHandler(key)}/>
+        placeholder='ID'  
+        onChange={(key) => idHandler(key)}/>
         <input 
         className='border-solid border-2 border-black' 
         id='pw' 
         defaultValue={userPw}
         placeholder='PW' 
-        onKeyUp={(key) => pwHandler(key)}/>
+        onChange={(key) => pwHandler(key)}/>
         <input 
         className='border-solid border-2 border-black' 
         id='email' 
         defaultValue={userEmail}
         placeholder='EMAIL' 
-        onKeyUp={(key) => emailHandler(key)}/>
+        onChange={(key) => emailHandler(key)}/>
         <button 
         type="button" 
         className="inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out"

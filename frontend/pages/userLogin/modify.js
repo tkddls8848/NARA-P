@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 import { useRouter } from "next/router"
+import jwt from 'jsonwebtoken'
 
 const frontAddress = process.env.FRONT_URL
 const backAddress = process.env.BACK_URL
@@ -24,7 +25,12 @@ const Modify = () => {
     }
     const modifySubmit = async () => {
       console.log('rrrrrrr')
-      await axios.patch(backAddress + '/login/modify', {'id': userId, "password": userPw, 'email': userEmail, 'status': 'registered user'})      
+      let data = await axios.patch(backAddress + '/login/modify', {'id': userId, "password": userPw, 'email': userEmail}, {
+        withCredentials: true
+      })
+      const tmp = data.data
+      const tokendecode = jwt.decode(tmp.token)
+      console.log('tokenCheck', tokendecode)
       router.push(frontAddress + '/userLogin/login')
     }
 
@@ -36,19 +42,19 @@ const Modify = () => {
         id='id' 
         defaultValue={userId}
         placeholder='ID' 
-        onKeyUp={(key) => idHandler(key)}/>
+        onChange={(key) => idHandler(key)}/>
         <input 
         className='border-solid border-2 border-black' 
         id='pw' 
         defaultValue={userPw}
         placeholder='PW' 
-        onKeyUp={(key) => pwHandler(key)}/>
+        onChange={(key) => pwHandler(key)}/>
         <input 
         className='border-solid border-2 border-black' 
         id='email' 
         defaultValue={userEmail}
         placeholder='EMAIL' 
-        onKeyUp={(key) => emailHandler(key)}/>
+        onChange={(key) => emailHandler(key)}/>
         <button 
         type='button'
         className="inline-block px-6 py-2.5 bg-gray-400 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"
