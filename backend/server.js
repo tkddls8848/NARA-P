@@ -1,14 +1,20 @@
 const express = require('express')
 const dotenv = require('dotenv').config({ path: '../.env' })
 const cors = require('cors')
+const cookieParser = require('cookie-parser')
+
 const taskRouter = require('./routes/taskRouter')
 const searchRouter = require('./routes/searchRouter')
 const loginRouter = require('./routes/loginRouter')
 
 const app = express()
 
+app.use(cookieParser())
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: true,
+    credentials: true
+  }));
 app.use(express.urlencoded( {extended : true } ))
 app.use('/api/v1/task', taskRouter)
 app.use('/api/v1/searchList', searchRouter)
