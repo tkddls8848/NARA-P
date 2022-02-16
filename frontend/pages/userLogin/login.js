@@ -6,19 +6,32 @@ import jwt from 'jsonwebtoken'
 const backAddress = process.env.BACK_URL
 const frontAddress = process.env.FRONT_URL
 
-export default function Login({toUser}) {
+export const getServerSideProps = (ctx) => {
+  const cookie = ctx ? ctx.req.cookies : 'empty'
+
+  return {
+      props: {
+        cookie
+      }
+  }
+}
+
+export default function Login({cookie}) {
 
   const [userId, setUserId] = useState('')
   const [userPw, setUserPw] = useState('')
   const [userEmail, setUserEmail] = useState('')
+  const [cookieDecode, setCookieDecode] = useState(jwt.decode(cookie.userCookie))
   const router = useRouter()
 
+  const loginState = cookieDecode ? cookieDecode.userId : 'Guest'
   const loginSubmit = async () => {
     console.log("SUBMIT", userId, userPw)
     let data = await axios.post(backAddress + '/login/logincheck', {'id': userId, 'pw': userPw}, {
       withCredentials: true
     })
     const tmp = data.data
+    console.log('token', tmp)
     const tokendecode = jwt.decode(tmp.token)
     console.log('tokenCheck', tokendecode)
     router.push(frontAddress + '/')
@@ -27,6 +40,9 @@ export default function Login({toUser}) {
   return (
     <div className="flex flex-col space-y-2 m-4">
     LOGIN FORM
+    <div>
+    {loginState} 님 반갑습니다.
+    </div>
     <input 
     className='border-solid border-2 border-black' 
     id='id' 

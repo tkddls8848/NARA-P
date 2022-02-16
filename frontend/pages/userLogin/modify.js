@@ -6,17 +6,24 @@ import jwt from 'jsonwebtoken'
 const frontAddress = process.env.FRONT_URL
 const backAddress = process.env.BACK_URL
 
-const Modify = () => {
+export const getServerSideProps = async (ctx) => {
+  const cookie = ctx.req.cookies
+  const uid = jwt.decode(cookie.userCookie)
+
+  return {
+      props: {
+        uid
+      }
+  }
+}
+
+const Modify = ({uid}) => {
   //임시
-  const [userId, setUserId] = useState('1234')
-  const [userPw, setUserPw] = useState('1234')
-  const [userEmail, setUserEmail] = useState('test@tes.com')
-  const [userStatus, setUserStatus] = useState('registered user')    
+  const [userId, setUserId] = useState(uid.userId)
+  const [userPw, setUserPw] = useState('')
+  const [userEmail, setUserEmail] = useState('')
   const router = useRouter()
 
-    const idHandler = (e) => {
-      setUserId(e.target.value)
-    }
     const pwHandler = (e) => {
       setUserPw(e.target.value)
     }
@@ -38,22 +45,21 @@ const Modify = () => {
         <div className="flex flex-col space-y-2 m-4">
         MODI FORM
         <input 
-        className='border-solid border-2 border-black' 
+        className='border-solid border-2 border-gray-200' 
         id='id' 
         defaultValue={userId}
-        placeholder='ID' 
-        onChange={(key) => idHandler(key)}/>
+        placeholder='ID' disabled/>
         <input 
         className='border-solid border-2 border-black' 
         id='pw' 
         defaultValue={userPw}
-        placeholder='PW' 
+        placeholder='Enter New Password' 
         onChange={(key) => pwHandler(key)}/>
         <input 
         className='border-solid border-2 border-black' 
         id='email' 
         defaultValue={userEmail}
-        placeholder='EMAIL' 
+        placeholder='Enter New E-Mail' 
         onChange={(key) => emailHandler(key)}/>
         <button 
         type='button'

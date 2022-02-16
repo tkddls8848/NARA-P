@@ -1,10 +1,9 @@
 import { useRouter } from "next/router"
 
-export default function Header() {
-
+const Header = () => {
     const router =  useRouter()
-    const menus = ['로그인창', '검색', 'TASK CRUD', 'login기능', '다중 검색 매크로', 'ABOUT ME']
-    const urls = ['/', '/task/naraSearch', '/test/searchList', '/userLogin/login', '/test/multisearch', '/test/aboutme']
+    const menus = ['로그인창', '검색', 'TASK CRUD', 'login기능', 'ABOUT ME']
+    const urls = ['/', '/task/naraSearch', '/test/searchList', '/userLogin/login', '/test/aboutme']
 
     const clickMenus = (e) => {
         const type = e.target.id
@@ -23,3 +22,5 @@ export default function Header() {
     </div>
   )
 }
+
+export default Header
