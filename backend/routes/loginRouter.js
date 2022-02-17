@@ -1,14 +1,9 @@
 const router = require('express').Router()
-const mongoose = require('mongoose')
-const url = process.env.MONGO_URL
 const userModel = require('../models/userModel')
 const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
 
-mongoose.connect(url).then((result) => {
-    console.log("LOGIN MONGO CONNECT", result)
-}).catch((err) => {
-    console.log("LOGIN MONGO ERR", err)
-})
+router.use(cookieParser())
 
 router.post('/logincheck', async (req, res) => {
     let currentUser = await userModel.findOne({id: req.body.id}).exec()    
@@ -36,8 +31,9 @@ router.post('/join', async (req, res) => {
     const userJoin = new userModel({id: req.body.id, pw: req.body.password, email: req.body.email})
 
     let token = jwt.sign({'userId': req.body.id}, process.env.TOKEN_SECRET_KEY)
-    res.cookie('userCookie', token, {maxAge: 10000000})
-    console.log(req.body.id, token)
+    res.cookie('userCookie', token, {maxAge: 1000000})
+    console.log(res.getHeaderNames())
+    console.log(res.getHeader('set-cookie'))
     await userJoin.save()
     return res.status(200).json({'status': process.env.STATUS_JOIN, 'token': token})
 })
@@ -48,19 +44,21 @@ router.patch('/modify', async (req, res) => {
     await userModel.updateOne({id: req.body.id}, {$set: {id: req.body.id, pw: req.body.pw, email: req.body.email}}).exec()
 
     let token = jwt.sign({'userId': req.body.id}, process.env.TOKEN_SECRET_KEY)
-    res.cookie('userCookie', token, {maxAge: 123})
-    console.log(req.body.id, token)
-
+    res.cookie('userCookie', token, {maxAge: 12345})
+    console.log(res.getHeaderNames())
+    console.log(res.getHeader('set-cookie'))
     return res.status(200).json({'status': process.env.STATUS_MODIFY, 'token': token})
     
 })
 
+//cookie header 확인필요 후 DELETE메소드 적용
 router.post('/delete', async (req, res) => {
-    console.log('DELETE', req.body)
+    console.log('DELETE', req.body.id)
     await userModel.deleteOne({'id': req.body.id})
     let token = jwt.sign({'userId': req.body.id}, process.env.TOKEN_SECRET_KEY, {expiresIn: '1s'})
     res.cookie('userCookie', token, {maxAge: 0})
-    console.log(req.body.id, token)
+    console.log(res.getHeaderNames())
+    console.log(res.getHeader('set-cookie'))
     return res.status(200).json({'status': process.env.STATUS_DELETE, 'token': token})
 })
 

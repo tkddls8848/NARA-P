@@ -22,6 +22,7 @@ router.get('/sajeon/:departname', (req, res) => {
         console.log("RESULT", result.data.response.body)
         if (result.data.response.body.totalCount != 0 && !null) {
             for(let i = 0 ; i < result.data.response.body.items.length ; i++){
+                result.data.response.body.items[i].type = 'sajeon'
                 result.data.response.body.items[i].isNew = false
                 dataSet.push(result.data.response.body.items[i])
             }                
@@ -63,6 +64,7 @@ router.get('/bone/:departname', (req, res) => {
         console.log("RESULT", result.data.response.body)
         if (result.data.response.body.totalCount != 0 && !null) {
             for(let i = 0 ; i < result.data.response.body.items.length ; i++){
+                result.data.response.body.items[i].type = 'bone'
                 result.data.response.body.items[i].isNew = false
                 dataSet.push(result.data.response.body.items[i])
             }                
