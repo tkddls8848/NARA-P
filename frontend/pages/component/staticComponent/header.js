@@ -2,8 +2,8 @@ import { useRouter } from "next/router"
 
 const Header = () => {
     const router =  useRouter()
-    const menus = ['로그인창', '검색', 'TASK CRUD', 'login기능', 'ABOUT ME']
-    const urls = ['/', '/task/naraSearch', '/userTask/usertask', '/userLogin/login', '/test/aboutme']
+    const menus = ['로그인창', 'login기능', '검색', 'TASK CRUD', 'ABOUT ME']
+    const urls = ['/', '/userLogin/login', '/task/naraSearch', '/userTask/usertask', '/aboutme']
 
     const clickMenus = (e) => {
         const type = e.target.id

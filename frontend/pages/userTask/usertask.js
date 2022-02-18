@@ -1,31 +1,38 @@
 import axios from "axios"
-import testData from './testData'
-import userTaskComponent from '../component/userTaskComponent/userTaskComponent'
+import UserTasks from "../component/userTaskComponent/userTasks"
+import jwt from 'jsonwebtoken'
 
 const frontAddress = process.env.FRONT_URL
 const backAddress = process.env.BACK_URL
 
 
 export const getServerSideProps = async (ctx) => {
-//  await axios.post(backAddress + '/userTask/save', {UserId:'GUEST', TaskType: 'sajeon', TaskData: testData})
-  await axios.get(backAddress + '/userTask/load/GUEST')
 
-  const state = 'sta123te'
+  const jwtCookie = ctx.req.cookies.userCookie
+  console.log('data', jwtCookie)
+  const decodeCookie = jwt.decode(jwtCookie)
+  console.log('data', decodeCookie)
+  const user = decodeCookie.userId
+  const data = await axios.get(backAddress + '/userTask/load/' + user)
+  const toData = data.data.result
   return{
     props:{
-      state
+      toData
     }
   }
 }
 
-const usertask = ({state}) => {
-  console.log(state)
+export default  function usertask({toData}) {
+  console.log(toData)
     return(
-      <div className="flex flex-col w-1/5">
-        <button className="m-4 bg-gray-500">dataget</button>
-        <button className="m-4 bg-red-500">datadel</button>
+      <div className="flex flex-col w-1/2">
+        {toData.length == 0 ? 
+          <div className="">No data</div>
+          :
+          toData.map((d) => (
+            <UserTasks usertasks={d} key={d[2]}></UserTasks>
+          ))
+        }
       </div>
     )
   }
-
-export default usertask
