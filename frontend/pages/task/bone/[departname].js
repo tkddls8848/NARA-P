@@ -2,11 +2,30 @@ import BoneTask from '../../component/taskComponent/boneTask'
 import SearchBar from '../../component/searchBar'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import jwt from 'jsonwebtoken'
 
 const backAddress = process.env.BACK_URL
 const frontAddress = process.env.FRONT_URL
 
-export default  function BoneComponent({toServer}) {
+export const getServerSideProps = async (ctx) => {
+  const pName = encodeURI(ctx.query.departname)
+  const beginDate = ctx.query.beginDate
+  const endDate = ctx.query.endDate
+  const fromServer = await axios.get(backAddress+'/task/bone/' + pName + '?beginDate=' + beginDate + '&endDate=' + endDate)
+  const toServer = fromServer.data
+  const jwtCookie = ctx.req.cookies.userCookie
+  const decodeCookie = jwt.decode(jwtCookie)
+  const user = decodeCookie.userId
+
+  return {
+    props: {
+      toServer,
+      user
+    }
+  }
+}
+
+export default  function BoneComponent({toServer, user}) {
   const [tasks, setTasks] = useState(toServer)
   const [isdata, setIsdata] = useState(true)
 
@@ -24,7 +43,7 @@ export default  function BoneComponent({toServer}) {
       <div className="h-full w-full grid gap-4 grid-cols-3 grid-rows-3">
         {tasks.map((task) => (
           <div key={task.refNo}>
-          <BoneTask task={task}></BoneTask>
+          <BoneTask task={task} user={user}></BoneTask>
           </div>
         ))}
       </div>   
@@ -36,18 +55,3 @@ export default  function BoneComponent({toServer}) {
   )
 }
 
-export const getServerSideProps = async (queryString) => {
-  const pName = encodeURI(queryString.query.departname)
-  const beginDate = queryString.query.beginDate
-  const endDate = queryString.query.endDate
-  let fromServer = await axios.get(backAddress+'/task/bone/' + pName + '?beginDate=' + beginDate + '&endDate=' + endDate)
-  const toServer = fromServer.data
-
-  console.log("toServer",toServer)
-
-  return {
-    props: {
-      toServer
-    }
-  }
-}

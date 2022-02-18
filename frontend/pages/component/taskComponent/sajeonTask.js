@@ -8,7 +8,7 @@ const SajeonTask = ({task, user}) => {
   const isNew = task.isNew
   const taskTitle = task.prdctClsfcNoNm
   const userId = user
-  const saveTask = async (e) => {
+  const saveTask = async () => {
     await axios.post(backAddress + '/userTask/save/', {'UserId': userId, 'TaskType': 'sajeon', 'TaskTitle': taskTitle})
     alert('"' + taskTitle + '"' + ' 사업이 저장 되었습니다.')
   }
