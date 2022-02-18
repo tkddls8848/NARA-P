@@ -5,22 +5,15 @@ const cookieParser = require('cookie-parser')
 
 router.use(cookieParser())
 
-router.post('/logincheck', async (req, res) => {
-    let currentUser = await userModel.findOne({id: req.body.id}).exec()    
-    console.log("cureentUser", currentUser, currentUser.pw, req.body.pw)
+router.get('/logincheck/:UserId', async (req, res) => {
+    let currentUser = await userModel.findOne({id: req.params.UserId}).exec()    
+    console.log("cureentUser", currentUser)
     if(currentUser != null) {
-        /*      
-          if(currentUser.pw != req.body.pw) {
-            return res.status(200).json({'status': 'wrong password'})
-        }        
-        */
         const userId = currentUser.id
         const userPw = currentUser.pw
-
         let token = jwt.sign({'userId': userId}, process.env.TOKEN_SECRET_KEY)
         res.cookie('userCookie', token, {maxAge: 100000})
-
-        return res.status(200).json({'status': process.env.STATUS_REGITERED})    
+        return res.status(200).json({'status': process.env.STATUS_REGITERED, 'data': token})    
     } else {
         return res.status(200).json({'status': process.env.STATUS_NO_REGITERED})
     }    
@@ -29,7 +22,6 @@ router.post('/logincheck', async (req, res) => {
 router.post('/join', async (req, res) => {
     console.log('JOIN', req.body)
     const userJoin = new userModel({id: req.body.id, pw: req.body.password, email: req.body.email})
-
     let token = jwt.sign({'userId': req.body.id}, process.env.TOKEN_SECRET_KEY)
     res.cookie('userCookie', token, {maxAge: 1000000})
     console.log(res.getHeaderNames())
