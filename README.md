@@ -10,14 +10,15 @@
   - Front-End : React + NextJS
   - Back-End : NodeJS + Express
   - Data API : [나라장터 공개 API 활용](https://www.data.go.kr/index.do)
-  - Database : Mongoose(구성 중)
+  - Database : Mongoose
   - DevOps : AWS, docker(구성 중)
 
 **URL**
-  - / : 페이지 홈
+  - / : 로그인 창
   - task/naraSearch : 검색 홈
   - task/sajeon/(기관명) : 검색 기관의 사전공고 검색 결과 출력
   - task/bone/(기관명) : 검색 기관의 본공고 검색 결과 출력
+  - userTask/usertask : 로그인 유저의 공고 저장 기록 확인
 
 **버전정보**
 * version 1.0
@@ -30,12 +31,15 @@
   - 라디오 버튼 서치 제공
   - 사전/본공고 컴포넌트 일원화
 
+  * version 2.0.0
+  - 로그인 기능 구현 (JWT를 이용한 로그인 상태 유지)
+  - 공고 저장 기능 추가
+
 **추후 개선 필요**
 - https
-- 검색 다양화(날짜 설정 및 여러 기관 동시 검색)
-- 선택적 데이터 호출(나라장터 API + Mongoose)
-- devOps
+- 검색 다양화(날짜 설정)
 - 도메인 네임 적용(www.naraapi.com)
 - 404 페이지
-- 공고의 개인 CRUD
-- login 상태 유지
+- devOps(docker)
+- 비밀번호 암호화, 로그인 검증
+- 공고 검색 속도 개선
