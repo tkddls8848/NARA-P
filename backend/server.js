@@ -10,9 +10,9 @@ const userTaskRouter = require('./routes/userTaskRouter')
 const loginRouter = require('./routes/loginRouter')
 
 mongoose.connect(url).then((result) => {
-    console.log("LOGIN MONGO CONNECT")
+    console.log("LOGIN MONGO CONNECT", result)
 }).catch((err) => {
-    console.log("LOGIN MONGO ERR")
+    console.log("LOGIN MONGO ERR", err)
 })
 
 const app = express()
@@ -27,6 +27,10 @@ app.use(express.urlencoded( {extended : true } ))
 app.use('/api/v1/task', taskRouter)
 app.use('/api/v1/userTask', userTaskRouter)
 app.use('/api/v1/login', loginRouter)
+
+app.get('/test', (req, res) => {
+    res.json({"test": "OK"})
+})
 
 app.listen(process.env.PORT, () => {
     console.log("SERVER ON")
