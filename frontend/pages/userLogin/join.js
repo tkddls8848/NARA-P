@@ -7,60 +7,60 @@ const frontAddress = process.env.FRONT_URL
 const backAddress = process.env.BACK_URL
 
 const Join = () => {
-  //임시
   const [userId, setUserId] = useState('')
   const [userPw, setUserPw] = useState('')
-  const [userEmail, setUserEmail] = useState('')
+  const [userEmail, setUserEmail] = useState('')  
   const router = useRouter()
 
-    const idHandler = (e) => {     
+  const inputHandler = (e) => {
+    const type = e.target.id
+    if (type == 'id') {
       setUserId(e.target.value) 
+    } else if (type == 'pw') {
+      setUserPw(e.target.value) 
+    } else if (type == 'email') {
+      setUserEmail(e.target.value) 
     }
-    const pwHandler = (e) => {
-      setUserPw(e.target.value)
-    }
-    const emailHandler = (e) => {
-      setUserEmail(e.target.value)
-    }
-    const joinSubmit = async () => {
-      console.log('rrrrrrr', userId, userPw, userEmail)
-      let data = await axios.post(backAddress + '/login/join', {'id': userId, "password": userPw, 'email': userEmail}, {
-        withCredentials: true
-      })
-      const tmp = data.data
-      const tokendecode = jwt.decode(tmp.token)
-      console.log('tokenCheck', tokendecode)
-      router.push(frontAddress + '/userLogin/login')
-    }
+  }
 
-    return (
-        <div className="flex flex-col space-y-2 m-4">
-        JOIN FORM
-        <input 
-        className='border-solid border-2 border-black' 
-        id='id' 
-        defaultValue={userId}
-        placeholder='ID'  
-        onChange={(key) => idHandler(key)}/>
-        <input 
-        className='border-solid border-2 border-black' 
-        id='pw' 
-        defaultValue={userPw}
-        placeholder='PW' 
-        onChange={(key) => pwHandler(key)}/>
-        <input 
-        className='border-solid border-2 border-black' 
-        id='email' 
-        defaultValue={userEmail}
-        placeholder='EMAIL' 
-        onChange={(key) => emailHandler(key)}/>
-        <button 
-        type="button" 
-        className="inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out"
-        onClick={() => {joinSubmit()}}>JOIN</button> 
+  const joinSubmit = async () => {
+    let data = await axios.post(backAddress + '/login/join', {'id': userId, "password": userPw, 'email': userEmail}, {
+      withCgreenentials: true
+    })
+    console.log('tokenCheck', jwt.decode(data.data.token))
+    alert("가입되었습니다.")
+    router.push(frontAddress + '/')
+  }
+
+  return (
+  <div className='flex justify-center'>
+    <div className="container max-w-sm mx-auto bg-white rounded-xl shadow-lg m-5 p-5">
+      <div className='flex justify-center py-4 text-lg'>
+        회원가입
       </div>
-      
-    )
+      <div className="flex flex-col space-y-3 justify-items-center">
+        <input 
+        className='border-solid border-2 border-gray-400 rounded-md' 
+        id='id'
+        placeholder='Enter Your ID'  
+        onChange={(e) => inputHandler(e)}/>
+        <input 
+        className='border-solid border-2 border-gray-400 rounded-md' 
+        id='pw'
+        placeholder='Enter Your Password' 
+        onChange={(e) => inputHandler(e)}/>
+        <input 
+        className='border-solid border-2 border-gray-400 rounded-md' 
+        id='email'
+        placeholder='Enter Your E-Mail' 
+        onChange={(e) => inputHandler(e)}/>
+        <button 
+        className="inline-block px-6 py-2.5 bg-green-400 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out"    
+        onClick={() => joinSubmit()}>회원가입</button>
+      </div>
+    </div>
+  </div>            
+  )
 }
 
 export default Join

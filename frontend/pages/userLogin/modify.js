@@ -24,12 +24,14 @@ const Modify = ({uid}) => {
   const [userEmail, setUserEmail] = useState('')
   const router = useRouter()
 
-    const pwHandler = (e) => {
-      setUserPw(e.target.value)
+  const inputHandler = (e) => {
+    const type = e.target.id
+    if (type == 'pw') {
+      setUserPw(e.target.value) 
+    } else if (type == 'email') {
+      setUserEmail(e.target.value) 
     }
-    const emailHandler = (e) => {
-      setUserEmail(e.target.value)
-    }
+  }
     const modifySubmit = async () => {
       console.log('rrrrrrr')
       let data = await axios.patch(backAddress + '/login/modify', {'id': userId, "password": userPw, 'email': userEmail}, {
@@ -50,17 +52,17 @@ const Modify = ({uid}) => {
         defaultValue={userId}
         placeholder='ID' disabled/>
         <input 
-        className='border-solid border-2 border-black' 
+        className='border-solid border-2 border-gray-200' 
         id='pw' 
         defaultValue={userPw}
         placeholder='Enter New Password' 
-        onChange={(key) => pwHandler(key)}/>
+        onChange={(e) => inputHandler(e)}/>
         <input 
-        className='border-solid border-2 border-black' 
+        className='border-solid border-2 border-gray-200' 
         id='email' 
         defaultValue={userEmail}
         placeholder='Enter New E-Mail' 
-        onChange={(key) => emailHandler(key)}/>
+        onChange={(e) => inputHandler(e)}/>
         <button 
         type='button'
         className="inline-block px-6 py-2.5 bg-gray-400 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"

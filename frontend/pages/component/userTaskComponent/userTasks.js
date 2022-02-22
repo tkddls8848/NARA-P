@@ -9,7 +9,6 @@ const UserTasks = ({usertasks}) => {
   const router = useRouter()
 
   const deleteTask = async () => {
-    console.log(contentNumber)
     await axios.delete(backAddress + '/userTask/delete/' + contentNumber)
     alert('삭제되었습니다.')
     router.push(frontAddress + '/userTask/usertask')

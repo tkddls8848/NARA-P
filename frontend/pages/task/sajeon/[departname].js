@@ -40,13 +40,13 @@ const SajeonComponent = ({toServer, user}) => {
       <SearchBar address={frontAddress}></SearchBar>
       {isdata 
       ? 
-        <div className="h-full w-full grid gap-4 grid-cols-3 grid-rows-3">
-          {tasks.map((task) => (
-            <div key={task.refNo}>
-              <SajeonTask task={task} user={user}></SajeonTask>
-            </div>
-          ))}
-        </div>      
+      <div className="h-full w-full grid gap-4 grid-cols-3 grid-rows-3">
+        {tasks.map((task) => (
+          <div key={task.refNo}>
+            <SajeonTask task={task} user={user}></SajeonTask>
+          </div>
+        ))}
+      </div>      
       :
       <div>No data</div>
        }
