@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
-const dataSchema = new schema({
+const searchLogicSchema = new schema({
     departname: String,
     taskType: String,
-    data: Object
+    dateRange: Array
 }, {versionKey: false})
 
-module.exports = mongoose.model('naraData' , dataSchema)
+module.exports = mongoose.model('searchlogics', searchLogicSchema)

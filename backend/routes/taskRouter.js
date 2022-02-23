@@ -16,7 +16,7 @@ router.get('/sajeon/:departname', (req, res) => {
     const api = (url + "?"+ serviceKey + "&" + datasize + "&" + date + '&' + departname + '&' + type)
     const api1 = (url1 + "?"+ serviceKey + "&" + datasize + "&" + date + '&' + departname + '&' + type)
     const api2 = (url2 + "?"+ serviceKey + "&" + datasize + "&" + date + '&' + departname + '&' + type)
-    let dataSet = []
+    const dataSet = []
 
     dataProcess = (result) => {
         console.log("RESULT", result.data.response.body)
@@ -46,19 +46,20 @@ router.get('/sajeon/:departname', (req, res) => {
     getData(api + '||' + api1 + '||' + api2)
 })
 
+
+
 //본공고
-router.get('/bone/:departname', (req, res) => {
+router.get('/bone/:departname', async (req, res) => {
     const url = 'http://apis.data.go.kr/1230000/BidPublicInfoService02/getBidPblancListInfoCnstwkPPSSrch'
     const url1 = 'http://apis.data.go.kr/1230000/BidPublicInfoService02/getBidPblancListInfoServcPPSSrch'
     const url2 = 'http://apis.data.go.kr/1230000/BidPublicInfoService02/getBidPblancListInfoThngPPSSrch'
     const departname = 'dminsttNm=' + encodeURIComponent(req.params.departname)
-    // 검색 기간 쿼리 스트링
     const date = 'inqryBgnDt='+ req.query.beginDate +'&inqryEndDt=' + req.query.endDate
-
+    
     const api = (url + "?"+ serviceKey + "&" + datasize + "&inqryDiv=1&" + date + '&' + departname + '&' + type)
     const api1 = (url1 + "?"+ serviceKey + "&" + datasize + "&inqryDiv=1&" + date + '&' + departname + '&' + type)
     const api2 = (url2 + "?"+ serviceKey + "&" + datasize + "&inqryDiv=1&" + date + '&' + departname + '&' + type)
-    let dataSet = []
+    const dataSet = []
 
     dataProcess = (result) => {
         console.log("RESULT", result.data.response.body)
