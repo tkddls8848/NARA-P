@@ -5,6 +5,7 @@ class MyDocument  extends Document {
         return (
             <Html>
                 <Head>
+                    <link rel='icon' href='/naraapi.jpg'></link>
                     <meta name="google-site-verification" content="37Qt-RHCauaYHeSXVDdfmVyj5xjT2GlCnpmhSumhPTQ" />
                 </Head>
                 <body>

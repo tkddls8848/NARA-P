@@ -23,11 +23,16 @@ export default function Login({cookie}) {
   const loginState = cookieDecode ? cookieDecode.userId : 'Guest'
 
   const loginSubmit = async () => {
-    const data = await axios.get(backAddress + '/login/logincheck/' +  userId, {
+    const data = await axios.post(backAddress + '/login/logincheck/',{'userId': userId, 'userPw': userPw}, {
       withCredentials: true
     })
-    console.log('tokenCheck', jwt.decode(data.data.data))
-    router.push(frontAddress + '/task/naraSearch')
+    console.log(data.data)
+    if (data.data.state == 'wrong password') {
+      alert('로그인 정보가 잘못되었습니다.')
+    } else {
+      console.log('tokenCheck', jwt.decode(data.data.data))
+      router.push(frontAddress + '/task/naraSearch')
+    }
   }
   const logoutSubmit = async() => {
     await axios.post(backAddress + '/login/logout', {'cookie': cookie}, {

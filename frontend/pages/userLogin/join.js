@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios"
 import { useRouter } from "next/router"
 import jwt from 'jsonwebtoken'
@@ -9,27 +9,52 @@ const backAddress = process.env.BACK_URL
 const Join = () => {
   const [userId, setUserId] = useState('')
   const [userPw, setUserPw] = useState('')
+  const [userRePw, setUserRePw] = useState()
   const [userEmail, setUserEmail] = useState('')  
+  let passwordInputChecker = false
   const router = useRouter()
+
+  useEffect(() => {
+    passwordChecker()
+  }, [userPw, userRePw])
+
+  const passwordChecker = () => {
+    console.log(userPw, userRePw)
+    userPw == userRePw ?
+      document.getElementById('pwAlarm').innerText = '확인되었습니다.' : 
+      document.getElementById('pwAlarm').innerText = '비밀번호 입력이 잘못되었습니다.'
+  }
 
   const inputHandler = (e) => {
     const type = e.target.id
+    console.log("type", type)
     if (type == 'id') {
       setUserId(e.target.value) 
     } else if (type == 'pw') {
       setUserPw(e.target.value) 
     } else if (type == 'email') {
       setUserEmail(e.target.value) 
-    }
+    } else if (type == 'repw') {
+      e.target.value == userPw ? passwordInputChecker = true : passwordInputChecker = false
+      setUserRePw(e.target.value) 
+    } 
   }
 
   const joinSubmit = async () => {
+    console.log("userinfo",userId, userPw, userEmail)
     let data = await axios.post(backAddress + '/login/join', {'id': userId, "password": userPw, 'email': userEmail}, {
       withCgreenentials: true
     })
-    console.log('tokenCheck', jwt.decode(data.data.token))
-    alert("가입되었습니다.")
-    router.push(frontAddress + '/')
+    console.log(data.data)
+    if (data.data.state == 'already join user') {
+      alert("이미 가입되어 있습니다.")
+    } else if (data.data.state == 'join user') {
+      console.log('tokenCheck', jwt.decode(data.data.token))
+      alert("가입되었습니다.")
+      router.push(frontAddress + '/')
+    } else if (data.data.state == 'null data') {
+      alert("null")
+    }
   }
 
   return (
@@ -49,6 +74,12 @@ const Join = () => {
         id='pw'
         placeholder='Enter Your Password' 
         onChange={(e) => inputHandler(e)}/>
+        <input 
+        className='border-solid border-2 border-gray-400 rounded-md' 
+        id='repw' 
+        placeholder='Re Enter New Password' 
+        onChange={(e) => inputHandler(e)}/>
+      <div className='text-xs text-red-500' id='pwAlarm'></div>
         <input 
         className='border-solid border-2 border-gray-400 rounded-md' 
         id='email'
