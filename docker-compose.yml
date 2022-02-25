@@ -1,0 +1,28 @@
+version: "3"
+
+networks: 
+  broker-net: 
+    external: 
+      name: broker 
+# env config 반영 필요(front: frontaddress, backaddress / back: port, mongo config)
+services:
+  nara-back:
+    networks: 
+      broker-net: 
+        ipv4_address: 172.18.0.2
+    image: nara_back
+    stdin_open: true
+    ports:
+      - "5000:5000"
+  nara-front:
+    networks: 
+      broker-net: 
+        ipv4_address: 172.18.0.3
+    image: nara_front
+    stdin_open: true
+    ports:
+      - "3000:3000"
+
+
+
+
