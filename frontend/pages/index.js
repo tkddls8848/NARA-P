@@ -27,11 +27,12 @@ export default function Login({ cookie }) {
     const data = await axios.post(backAddress + '/login/logincheck/',{'userId': userId, 'userPw': userPw}, {
       withCredentials: true
     })
-    console.log(data.data)
     if (data.data.state == 'wrong password') {
       alert('로그인 정보가 잘못되었습니다.')
+    } else if (data.data.state == 'not registered user') {
+      alert('이미 가입되어 있습니다.')
     } else {
-      router.push(frontAddress + '/task/naraSearch')
+      router.push(frontAddress + '/task/narasearch')
     }
   }
   const logoutSubmit = async() => {

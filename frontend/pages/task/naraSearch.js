@@ -18,7 +18,7 @@ export const getServerSideProps = async (ctx) => {
 }
 
 
-const naraSearch = () => {
+const narasearch = () => {
   return (
     <div>
       <SearchBar address={frontAddress}></SearchBar>
@@ -29,4 +29,4 @@ const naraSearch = () => {
   )
 }
 
-export default naraSearch
+export default narasearch

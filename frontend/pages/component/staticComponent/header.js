@@ -2,7 +2,7 @@ const Header = (appContent) => {
 
     const router =  appContent.router
     const menus = ['홈', '검색', '저장된 공고']
-    const urls = ['/', '/task/naraSearch', '/usertask/usertask']
+    const urls = ['/', '/task/narasearch', '/usertask/usertask']
     const auth = appContent.checkcookies
 
     const clickMenus = (e) => {
@@ -12,11 +12,11 @@ const Header = (appContent) => {
     }
     
     return (
-    <div className="flex space-x-6 items-center flex-wrap bg-slate-600 px-14 py-6">
+    <div className="flex space-x-6 items-center flex-wrap bg-slate-600 px-10 py-6">
         <span className="flex items-center">
-            <h1 className="text-3xl font-bold text-white mr-12">NARA-P</h1>
+            <h1 className="text-2xl font-bold text-white mr-10">NARA-P</h1>
             {menus.map((menu) => (
-                <button className="text-xs text-white p-4" id={menu} key={menu} onClick={clickMenus}>{menu}</button>
+                <button className="text-xs text-white p-2" id={menu} key={menu} onClick={clickMenus}>{menu}</button>
             ))}
         </span>
     </div>

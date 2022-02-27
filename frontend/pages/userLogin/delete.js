@@ -1,7 +1,6 @@
 import axios from "axios"
 import { useRouter } from "next/router"
 import jwt from 'jsonwebtoken'
-import cookies from 'next-cookies'
 
 const frontAddress = process.env.FRONT_URL
 const backAddress = process.env.BACK_URL
@@ -9,8 +8,7 @@ const backAddress = process.env.BACK_URL
 export const getServerSideProps = async (ctx) => {
   const cookie = ctx.req.cookies
   const uid = jwt.decode(cookie.userCookie)
-  const allCookies = cookies(ctx).userCookie
-  console.log('allCookies', allCookies)
+
   return {
       props: {
         uid
@@ -44,7 +42,7 @@ const Delete = ({uid}) => {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default Delete
