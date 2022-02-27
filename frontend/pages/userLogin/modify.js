@@ -6,7 +6,8 @@ import jwt from 'jsonwebtoken'
 const frontAddress = process.env.FRONT_URL
 const backAddress = process.env.BACK_URL
 
-export const getServerSideProps = async (ctx) => {
+export const getServerSideProps = async (ctx) => {  
+
   const cookie = ctx.req.cookies
   const uid = jwt.decode(cookie.userCookie)
 
@@ -17,7 +18,8 @@ export const getServerSideProps = async (ctx) => {
   }
 }
 
-const Modify = ({uid}) => {
+const Modify = ({ uid }) => {
+
   const userId = uid.userId
   const [userPw, setUserPw] = useState('')
   const [userRePw, setUserRePw] = useState()
@@ -30,7 +32,6 @@ const Modify = ({uid}) => {
   }, [userPw, userRePw])
 
   const passwordChecker = () => {
-    console.log(userPw, userRePw)
     userPw == userRePw ?
       document.getElementById('pwAlarm').innerText = '확인되었습니다.' : 
       document.getElementById('pwAlarm').innerText = '비밀번호 입력이 잘못되었습니다.'
@@ -44,28 +45,24 @@ const Modify = ({uid}) => {
       setUserEmail(e.target.value) 
     } else if (type == 'repw') {
       e.target.value == userPw ? setPwInputCheck(true) : setPwInputCheck(false)
-      console.log("handler", e.target.value , userPw, pwInputCheck)
       setUserRePw(e.target.value) 
     } 
   }
 
   const modifySubmit = async () => {
-    console.log(pwInputCheck)
     if (pwInputCheck == true) {
-      let data = await axios.patch(backAddress + '/login/modify', {'id': userId, "pw": userPw, 'email': userEmail}, {
+      await axios.patch(backAddress + '/login/modify', {'id': userId, "pw": userPw, 'email': userEmail}, {
         withCredentials: true
       })
-      const tmp = data.data
-      const tokendecode = jwt.decode(tmp.token)
-      console.log('tokenCheck', tokendecode)
       router.push(frontAddress + '/')
     } else {
       alert('비밀번호 입력이 잘못되었습니다.')
     }
   }
+
   return (
     <div className='flex justify-center'>
-    <div className="container max-w-sm mx-auto bg-white rounded-xl shadow-lg m-5 p-5">
+      <div className="container max-w-sm mx-auto bg-white border-2 rounded-xl shadow-lg m-5 p-5">
       <div className='flex justify-center py-4 text-lg'>
         회원정보 수정
       </div>
@@ -86,7 +83,7 @@ const Modify = ({uid}) => {
         id='repw' 
         placeholder='Re Enter New Password' 
         onChange={(e) => inputHandler(e)}/>
-      <div className='text-xs text-red-500' id='pwAlarm'></div>
+        <div className='text-xs text-red-500' id='pwAlarm'></div>
         <input 
         className='border-solid border-2 border-gray-400 rounded-md' 
         id='email'

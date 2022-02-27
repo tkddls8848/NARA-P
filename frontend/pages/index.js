@@ -15,7 +15,8 @@ export const getServerSideProps = (ctx) => {
   }
 }
 
-export default function Login({cookie}) {
+export default function Login({ cookie }) {
+
   const [userId, setUserId] = useState('')
   const [userPw, setUserPw] = useState('')
   const cookieDecode =  jwt.decode(cookie.userCookie)
@@ -30,7 +31,6 @@ export default function Login({cookie}) {
     if (data.data.state == 'wrong password') {
       alert('로그인 정보가 잘못되었습니다.')
     } else {
-      console.log('tokenCheck', jwt.decode(data.data.data))
       router.push(frontAddress + '/task/naraSearch')
     }
   }
@@ -44,7 +44,7 @@ export default function Login({cookie}) {
 
   return (
     <div className='flex justify-center'>
-      <div className="container max-w-sm mx-auto bg-white rounded-xl shadow-lg m-5 p-5">
+      <div className="container max-w-sm mx-auto bg-white border-2 rounded-xl shadow-lg m-5 p-5">
         <div className="flex flex-col space-y-2 m-4">
           <div className='flex justify-center pb-1 text-lg'>
             조달청 검색기 NARA-P입니다.

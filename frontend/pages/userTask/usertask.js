@@ -1,19 +1,24 @@
 import axios from "axios"
 import UserTasks from "../component/userTaskComponent/userTasks"
 import jwt from 'jsonwebtoken'
-import UserTaskSearch from "../component/userTaskComponent/userTaskSearch"
+import NoData from "../component/nodata"
 
-const frontAddress = process.env.FRONT_URL
 const backAddress = process.env.BACK_URL
-
 
 export const getServerSideProps = async (ctx) => {
   const jwtCookie = ctx.req.cookies.userCookie
+  if (!jwtCookie) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
   const decodeCookie = jwt.decode(jwtCookie)
   const user = decodeCookie.userId
   const data = await axios.get(backAddress + '/userTask/load/' + user)
   const toData = data.data.result
-  console.log('toData', toData)
   return{
     props:{
       toData
@@ -21,15 +26,16 @@ export const getServerSideProps = async (ctx) => {
   }
 }
 
-export default  function usertask({toData}) {
+export default  function usertask({ toData }) {
     return(
-      <div className="flex flex-col w-1/2">
-        <UserTaskSearch></UserTaskSearch>
+      <div>
         {toData.length == 0 ? 
-          <div className="">No data</div> :
-          toData.map((d) => (
+        <NoData /> :
+        <div className="grid grid-cols-2 grid-flow-row gap-x-2">
+          {toData.map((d) => (
             <UserTasks usertasks={d} key={d[2]}></UserTasks>
-          ))
+          ))}
+        </div>
         }
       </div>
     )

@@ -59,7 +59,7 @@ const Join = () => {
 
   return (
   <div className='flex justify-center'>
-    <div className="container max-w-sm mx-auto bg-white rounded-xl shadow-lg m-5 p-5">
+    <div className="container max-w-sm mx-auto bg-white border-2 rounded-xl shadow-lg m-5 p-5">
       <div className='flex justify-center py-4 text-lg'>
         회원가입
       </div>

@@ -1,26 +1,26 @@
-import { useRouter } from "next/router"
+const Header = (appContent) => {
 
-const Header = () => {
-    const router =  useRouter()
-    const menus = ['홈', '검색', '저장된 공고', 'ABOUT ME']
-    const urls = ['/', '/task/naraSearch', '/userTask/usertask', '/aboutme']
+    const router =  appContent.router
+    const menus = ['홈', '검색', '저장된 공고']
+    const urls = ['/', '/task/naraSearch', '/usertask/usertask']
+    const auth = appContent.checkcookies
 
     const clickMenus = (e) => {
         const type = e.target.id
         const number = menus.indexOf(type)
-        router.push(urls[number])        
+        auth == true ? router.push(urls[number]) : alert('로그인 되어 있지 않습니다.')
     }
-
-  return (
-    <div className="flex space-x-6 items-center flex-wrap bg-blue-500 px-14 py-6">
+    
+    return (
+    <div className="flex space-x-6 items-center flex-wrap bg-slate-600 px-14 py-6">
         <span className="flex items-center">
             <h1 className="text-3xl font-bold text-white mr-12">NARA-P</h1>
             {menus.map((menu) => (
-                <button className="text-s text-white p-4" id={menu} key={menu} onClick={clickMenus}>{menu}</button>
+                <button className="text-xs text-white p-4" id={menu} key={menu} onClick={clickMenus}>{menu}</button>
             ))}
         </span>
     </div>
-  )
+    )
 }
 
 export default Header

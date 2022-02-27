@@ -1,7 +1,6 @@
 import Link from "next/link"
 import axios from 'axios'
 
-const frontAddress = process.env.FRONT_URL
 const backAddress = process.env.BACK_URL
 
 const BoneTask = ({task, user}) => {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useRouter } from "next/router"
 import DatePicker from "react-datepicker"
 import subDays from "date-fns/subDays"
@@ -11,7 +11,6 @@ const SearchBar = ({address}) => {
     const [departName, setDepartName] = useState(null)
     const [startDate, setStartDate] = useState(subDays(new Date(), 1))
     const [endDate, setEndDate] = useState(new Date())
-    const [searchPermission, setSearchPermission] = useState(false)
     const message = ''
     const router = useRouter()
 
@@ -25,7 +24,6 @@ const SearchBar = ({address}) => {
     }
 
     const ButtonClick = () => {
-
         const beginDate = moment(startDate).format("YYYYMMDD0000")
         const lastDate = moment(endDate).format("YYYYMMDD0000")
         let searchFlag = false
@@ -36,20 +34,15 @@ const SearchBar = ({address}) => {
             departName == null ? message += ' 부서명' : console.log('fdsa')
             beginDate >= lastDate ? message += ' 날짜' : console.log('fdsa')
             console.log("CHECKER" , message)      
-            WarningMessage(message)
+            document.getElementById('warning').innerText = (message + '(이)가 잘못되었습니다.')
             alert(message + '(이)가 잘못되었습니다.')  
         } else {
             router.push(host + '/task/' + radioType + '/' + departName + '?' + 'beginDate' + '=' + beginDate + '&' + 'endDate' + '=' + lastDate)
         }
     }
 
-    const WarningMessage = (message) => {
-        console.log("This is Warning", message)
-        document.getElementById('warning').innerText = (message + '(이)가 잘못되었습니다.')
-    }
-
     return (
-    <div className="">
+    <div className="'flex justify-center'">
         <div className="flex justify-center items-center space-x-6 m-4">
             <div className="form-check form-check-inline">
                 <input className="form-check-input rounded-full h-4 w-4 border border-gray-300 checked:bg-blue-400 mt-1 align-top mr-2 cursor-pointer"
@@ -79,7 +72,7 @@ const SearchBar = ({address}) => {
                 </div>
             </div>
         </div>
-        <div className="mx-16 my-4 text-red-500" id='warning' />
+        <div className="mx-16 my-4 text-center text-red-500" id='warning' />
     </div>
     )
 }

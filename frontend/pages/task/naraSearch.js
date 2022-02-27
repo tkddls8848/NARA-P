@@ -2,6 +2,22 @@ import SearchBar from '../component/searchBar'
 
 const frontAddress = process.env.FRONT_URL
 
+export const getServerSideProps = async (ctx) => {
+  const jwtCookie = ctx.req.cookies.userCookie
+  if (!jwtCookie) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
+  return {
+    props: {}
+  }
+}
+
+
 const naraSearch = () => {
   return (
     <div>

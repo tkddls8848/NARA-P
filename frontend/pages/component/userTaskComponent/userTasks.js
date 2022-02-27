@@ -15,12 +15,12 @@ const UserTasks = ({usertasks}) => {
   }
 
   return (
-    <div className="flex-col m-3 p-4 bg-white rounded-xl shadow-lg items-left" key={usertasks[0] + usertasks[3]}>
+    <div className="m-3 p-4 bg-white rounded-lg border-2 border-gray-300" key={usertasks[0] + usertasks[3]}>
       <p key={usertasks[3] + usertasks[0]}>유저명 : {usertasks[0]}</p>
       <p key={usertasks[3] + usertasks[1]}>업무 타입 : {usertasks[1]}</p>
       <p key={usertasks[3] + usertasks[2]}>업무명 : {usertasks[2]}</p>
       <button 
-      className="m-1 inline-block px-3 py-1.5 bg-red-400 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
+      className="inline-block px-3 py-2 mt-2 bg-red-400 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
       onClick={() => deleteTask()}>삭제</button>
     </div>
   )
