@@ -19,7 +19,6 @@ router.get('/sajeon/:departname', (req, res) => {
     const dataSet = []
 
     dataProcess = (result) => {
-        console.log("RESULT", result.data.response.body)
         if (result.data.response.body.totalCount != 0 && !null) {
             for(let i = 0 ; i < result.data.response.body.items.length ; i++){
                 result.data.response.body.items[i].type = 'sajeon'
@@ -31,18 +30,14 @@ router.get('/sajeon/:departname', (req, res) => {
 
     getData = async (api) => {
         const array = api.split('||')
-        await axios.all([axios.get(array[0]), axios.get(array[1]), axios.get(array[2])])
-        .then(axios.spread((result, result1, result2) => {
-            dataProcess(result)
-            dataProcess(result1)
-            dataProcess(result2)
-            //데이터 공고 게시 날짜 기준 내림차순 정렬
-            dataSet.sort((a, b) => {
-                return a.rcptDt > b.rcptDt ? -1 :  a.rcptDt < b.rcptDt ? 1 : 0
-            })
-            res.send(dataSet)
-       }))
+        await Promise.all([axios.get(array[0]), axios.get(array[1]), axios.get(array[2])])
+        .then((responses) => {responses.forEach((response) => {dataProcess(response)})})
+        dataSet.sort((a, b) => {
+            return a.rcptDt > b.rcptDt ? -1 :  a.rcptDt < b.rcptDt ? 1 : 0
+        })
+        res.send(dataSet)
     }
+    
     getData(api + '||' + api1 + '||' + api2)
 })
 
@@ -62,7 +57,6 @@ router.get('/bone/:departname', async (req, res) => {
     const dataSet = []
 
     dataProcess = (result) => {
-        console.log("RESULT", result.data.response.body)
         if (result.data.response.body.totalCount != 0 && !null) {
             for(let i = 0 ; i < result.data.response.body.items.length ; i++){
                 result.data.response.body.items[i].type = 'bone'
@@ -73,18 +67,13 @@ router.get('/bone/:departname', async (req, res) => {
     }
 
     getData = async (api) => {
-        const array = api.split('||')       
-        await axios.all([axios.get(array[0]), axios.get(array[1]), axios.get(array[2])])
-        .then(axios.spread((result, result1, result2) => {
-            dataProcess(result)
-            dataProcess(result1)
-            dataProcess(result2)
-            //데이터 공고 게시 날짜 기준 내림차순 정렬
-            dataSet.sort((a, b) => {
-                return a.bidNtceDt > b.bidNtceDt ? -1 :  a.bidNtceDt < b.bidNtceDt ? 1 : 0
-            })
-            res.send(dataSet)
-       }))
+        const array = api.split('||')
+        await Promise.all([axios.get(array[0]), axios.get(array[1]), axios.get(array[2])])
+        .then((responses) => {responses.forEach((response) => {dataProcess(response)})})
+        dataSet.sort((a, b) => {
+            return a.rcptDt > b.rcptDt ? -1 :  a.rcptDt < b.rcptDt ? 1 : 0
+        })
+        res.send(dataSet)
     }
     getData(api + '||' + api1 + '||' + api2)
 })

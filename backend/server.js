@@ -23,7 +23,7 @@ app.use(express.json())
 app.use(cors({
     origin: true,
     credentials: true
-  }));
+  }))
 app.use(express.urlencoded( {extended : true } ))
 app.use('/api/v1/task', taskRouter)
 app.use('/api/v1/userTask', userTaskRouter)
