@@ -30,7 +30,7 @@ export default function Login({ cookie }) {
     if (data.data.state == 'wrong password') {
       alert('로그인 정보가 잘못되었습니다.')
     } else if (data.data.state == 'not registered user') {
-      alert('이미 가입되어 있습니다.')
+      alert('가입되어 있지 않았습니다.')
     } else {
       router.push(frontAddress + '/task/narasearch')
     }

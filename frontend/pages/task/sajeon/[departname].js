@@ -25,7 +25,6 @@ export const getServerSideProps = async (ctx) => {
   const toServer = fromServer.data
   const decodeCookie = jwt.decode(jwtCookie)
   const user = decodeCookie.userId
-
   return {
     props: {
       toServer,
@@ -43,7 +42,7 @@ const SajeonComponent = ({toServer, user}) => {
       setIsdata(false)
     }
   }, [tasks])
-
+console.log(tasks)
   return (
     <div>
     <SearchBar address={frontAddress}></SearchBar>
