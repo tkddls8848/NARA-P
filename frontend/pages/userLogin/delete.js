@@ -16,12 +16,12 @@ export const getServerSideProps = async (ctx) => {
   }
 }
 
-const Delete = ({uid}) => {
+const Delete = ( {uid} ) => {
   const userId = uid.userId
   const router = useRouter()
   
   const deleteSubmit = async () => {
-    await axios.post(backAddress + '/login/delete', {'id': userId}, {
+    await axios.delete(backAddress + '/login/' +  userId, {
       withCredentials: true
     })
     alert('삭제되었습니다.')

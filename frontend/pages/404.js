@@ -2,7 +2,7 @@ import { useRouter } from "next/router"
 
 const frontAddress = process.env.FRONT_URL
 
-const custom404 = () => {
+const Custom404 = () => {
     const router = useRouter()
     const backHome = () => {
         router.push('/')
@@ -23,4 +23,4 @@ const custom404 = () => {
     )
 }
 
-export default custom404
+export default Custom404

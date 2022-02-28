@@ -28,14 +28,10 @@ const Modify = ({ uid }) => {
   const router = useRouter()
 
   useEffect(() => {
-    passwordChecker()
-  }, [userPw, userRePw])
-
-  const passwordChecker = () => {
     userPw == userRePw ?
-      document.getElementById('pwAlarm').innerText = '확인되었습니다.' : 
-      document.getElementById('pwAlarm').innerText = '비밀번호 입력이 잘못되었습니다.'
-  }
+    document.getElementById('pwAlarm').innerText = '확인되었습니다.' : 
+    document.getElementById('pwAlarm').innerText = '비밀번호 입력이 잘못되었습니다.'
+  }, [userPw, userRePw])
 
   const inputHandler = (e) => {
     const type = e.target.id
@@ -51,7 +47,7 @@ const Modify = ({ uid }) => {
 
   const modifySubmit = async () => {
     if (pwInputCheck == true) {
-      await axios.patch(backAddress + '/login/modify', {'id': userId, "pw": userPw, 'email': userEmail}, {
+      await axios.patch(backAddress + '/login', {'user_id': userId, "user_pw": userPw, 'e_mail': userEmail}, {
         withCredentials: true
       })
       router.push(frontAddress + '/')

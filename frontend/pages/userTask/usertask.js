@@ -17,8 +17,9 @@ export const getServerSideProps = async (ctx) => {
   }
   const decodeCookie = jwt.decode(jwtCookie)
   const user = decodeCookie.userId
-  const data = await axios.get(backAddress + '/userTask/load/' + user)
+  const data = await axios.get(backAddress + '/usertask/' + user)
   const toData = data.data.result
+  
   return{
     props:{
       toData

@@ -24,7 +24,7 @@ export default function Login({ cookie }) {
   const loginState = cookieDecode ? cookieDecode.userId : 'Guest'
 
   const loginSubmit = async () => {
-    const data = await axios.post(backAddress + '/login/logincheck/',{'userId': userId, 'userPw': userPw}, {
+    const data = await axios.post(backAddress + '/login/signin', {'user_id': userId, 'user_pw': userPw}, {
       withCredentials: true
     })
     if (data.data.state == 'wrong password') {
@@ -35,8 +35,10 @@ export default function Login({ cookie }) {
       router.push(frontAddress + '/task/narasearch')
     }
   }
+
   const logoutSubmit = async() => {
-    await axios.post(backAddress + '/login/logout', {'cookie': cookie}, {
+    const uid = cookieDecode.userId
+    await axios.get(backAddress + '/login/' + uid, {
       withCredentials: true
     })
     alert('로그아웃 되었습니다.')

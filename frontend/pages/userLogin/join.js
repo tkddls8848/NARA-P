@@ -15,19 +15,13 @@ const Join = () => {
   const router = useRouter()
 
   useEffect(() => {
-    passwordChecker()
-  }, [userPw, userRePw])
-
-  const passwordChecker = () => {
-    console.log(userPw, userRePw)
     userPw == userRePw ?
-      document.getElementById('pwAlarm').innerText = '확인되었습니다.' : 
-      document.getElementById('pwAlarm').innerText = '비밀번호 입력이 잘못되었습니다.'
-  }
+    document.getElementById('pwAlarm').innerText = '확인되었습니다.' : 
+    document.getElementById('pwAlarm').innerText = '비밀번호 입력이 잘못되었습니다.'
+  }, [userPw, userRePw])
 
   const inputHandler = (e) => {
     const type = e.target.id
-    console.log("type", type)
     if (type == 'id') {
       setUserId(e.target.value) 
     } else if (type == 'pw') {
@@ -41,15 +35,12 @@ const Join = () => {
   }
 
   const joinSubmit = async () => {
-    console.log("userinfo",userId, userPw, userEmail)
-    let data = await axios.post(backAddress + '/login/join', {'id': userId, "password": userPw, 'email': userEmail}, {
+    let data = await axios.post(backAddress + '/login', {'user_id': userId, "user_pw": userPw, 'e_mail': userEmail}, {
       withCgreenentials: true
     })
-    console.log(data.data)
     if (data.data.state == 'already join user') {
       alert("이미 가입되어 있습니다.")
     } else if (data.data.state == 'join user') {
-      console.log('tokenCheck', jwt.decode(data.data.token))
       alert("가입되었습니다.")
       router.push(frontAddress + '/')
     } else if (data.data.state == 'null data') {

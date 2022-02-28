@@ -42,7 +42,7 @@ const SajeonComponent = ({toServer, user}) => {
       setIsdata(false)
     }
   }, [tasks])
-console.log(tasks)
+  
   return (
     <div>
     <SearchBar address={frontAddress}></SearchBar>
