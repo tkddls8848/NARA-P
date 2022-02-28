@@ -3,6 +3,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=nextjs,react
 .env.*
 .env
+*.pem
+*.pem.*
 ### NextJS ###
 # Next build dir
 .next/
