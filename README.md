@@ -11,7 +11,7 @@
   - Back-End : NodeJS + Express
   - Data API : [나라장터 공개 API 활용](https://www.data.go.kr/index.do)
   - Database : Mongoose
-  - DevOps : AWS, docker(구성 중)
+  - DevOps : AWS, docker
 
 **URL**
   - / : 로그인 창
@@ -29,10 +29,10 @@
 * version 2.0.0
   - 로그인 기능 구현 (JWT를 이용한 로그인 상태 유지)
   - 공고 저장 기능 추가
+  - https
+  - docker컨테이너 기반 배포
 
 **추후 개선 필요**
-- https
 - 도메인 네임 적용(www.naraapi.com)
-- devOps(docker)
 - 비밀번호 암호화, 로그인 검증
 - 공고 검색 속도 개선
