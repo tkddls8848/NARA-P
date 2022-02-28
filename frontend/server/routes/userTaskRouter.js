@@ -1,21 +1,21 @@
 const router = require('express').Router()
-const taskSaveModel = require('../models/userTaskModel')
+const userTaskModel = require('../models/userTaskModel')
 
-router.get('/load/:UserId', async (req, res) => {
-    const data = await taskSaveModel.find({UserId: req.params.UserId})
+router.get('/:userId', async (req, res) => {
+    const data = await userTaskModel.find({user_id: req.params.userId})
     let toData = []
-    data.map((d) => { toData.push([d.UserId, d.TaskType, d.TaskTitle, d.contentNumber]) })
+    data.map((d) => { toData.push([d.user_id, d.task_type, d.task_title, d.content_number]) })
     return res.status(200).json({'message': 'complete', 'result': toData})
 })
 
-router.post('/save', async (req, res) => {
-    const taskSave = new taskSaveModel({UserId: req.body.UserId, TaskType: req.body.TaskType, TaskTitle: req.body.TaskTitle})
+router.post('/', async (req, res) => {
+    const taskSave = new userTaskModel({user_id: req.body.user_id, task_type: req.body.task_type, task_title: req.body.task_title})
     await taskSave.save()
     return res.status(200).json({'message': 'complete'})
 })
 
-router.delete('/delete/:contentNumber', async (req, res) => {
-    await taskSaveModel.deleteOne({contentNumber: req.params.contentNumber})
+router.delete('/:contentNumber', async (req, res) => {
+    await userTaskModel.deleteOne({content_number: req.params.contentNumber})
     return res.status(200).json({'message': 'complete', 'contentNumber': req.params.contentNumber})
 })
 

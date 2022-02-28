@@ -6,13 +6,13 @@ const userTaskModel = require('../models/userTaskModel')
 
 router.use(cookieParser())
 
-router.post('/logincheck', async (req, res) => {
-    let loadedUser = await userModel.findOne({id: req.body.userId}).exec()    
-    if(loadedUser != null) {
-        if(loadedUser.pw == req.body.userPw){
-            const userId = loadedUser.id
-            const userPw = loadedUser.pw
-            let token = jwt.sign({'userId': userId}, process.env.TOKEN_SECRET_KEY)
+router.post('/signin', async (req, res) => {
+    const signinUser = await userModel.findOne({id: req.body.user_id}).exec()    
+    if(signinUser != null) {
+        if(signinUser.user_pw == req.body.user_pw){
+            const userId = signinUser.user_id
+            const userPw = signinUser.user_pw
+            const token = jwt.sign({'userId': userId}, process.env.TOKEN_SECRET_KEY)
             res.cookie('userCookie', token, {maxAge: 8640000})
             return res.status(200).json({'state': process.env.STATUS_REGITERED, 'data': token})    
         } else {
@@ -23,18 +23,19 @@ router.post('/logincheck', async (req, res) => {
     }    
 })
 
-router.post('/logout', (req, res) => {
-    let token = jwt.sign({'userId': req.body.cookie.userCookie}, process.env.TOKEN_SECRET_KEY, {expiresIn: '1s'})
+router.get('/:userId', (req, res) => {
+    console.log('LOGOUT')
+    const token = jwt.sign({'userId': req.params.userId}, process.env.TOKEN_SECRET_KEY, {expiresIn: '1s'})
     res.cookie('userCookie', token, {maxAge: 0})
     return res.status(200).json({'message': 'cookie del complete'})
 })
 
-router.post('/join', async (req, res) => {
-    const userCheck = await userModel.findOne({id:req.body.id})
-
+router.post('/', async (req, res) => {    
+    console.log("POST", req.body)
+    const userCheck = await userModel.findOne({user_id:req.body.user_id})
     if(userCheck == '' || userCheck == null) {
-        const userJoin = await new userModel({id: req.body.id, pw: req.body.password, email: req.body.email})
-        let token = jwt.sign({'userId': req.body.id}, process.env.TOKEN_SECRET_KEY)
+        const userJoin = await new userModel({user_id: req.body.user_id, user_pw: req.body.user_pw, e_mail: req.body.e_mail})
+        const token = jwt.sign({'userId': req.body.user_id}, process.env.TOKEN_SECRET_KEY)
         res.cookie('userCookie', token, {maxAge: 8640000})
         await userJoin.save()
         return res.status(200).json({'state': process.env.STATUS_JOIN, 'token': token})
@@ -43,19 +44,17 @@ router.post('/join', async (req, res) => {
     }
 })
 
-router.patch('/modify', async (req, res) => {
-    await userModel.updateOne({id: req.body.id}, {$set: {id: req.body.id, pw: req.body.pw, email: req.body.email}}).exec()
-    let token = jwt.sign({'userId': req.body.id}, process.env.TOKEN_SECRET_KEY)
+router.patch('/', async (req, res) => {
+    await userModel.updateOne({user_id: req.body.user_id}, {$set: {user_id: req.body.user_id, user_pw: req.body.user_pw, e_mail: req.body.e_mail}}).exec()
+    const token = jwt.sign({'userId': req.body.user_id}, process.env.TOKEN_SECRET_KEY)
     res.cookie('userCookie', token, {maxAge: 8640000})
     return res.status(200).json({'state': process.env.STATUS_MODIFY, 'token': token})    
 })
 
-//cookie header 확인필요 후 DELETE메소드 적용
-router.post('/delete', async (req, res) => {
-
-    await userModel.deleteOne({'id': req.body.id})
-    await userTaskModel.deleteMany({'id': req.body.id})    
-    let token = jwt.sign({'userId': req.body.id}, process.env.TOKEN_SECRET_KEY, {expiresIn: '1s'})
+router.delete('/:userId', async (req, res) => {
+    await userModel.deleteOne({'user_id': req.params.userId})
+    await userTaskModel.deleteMany({'user_id': req.params.userId})    
+    const token = jwt.sign({'userId': req.params.userId}, process.env.TOKEN_SECRET_KEY, {expiresIn: '1s'})
     res.cookie('userCookie', token, {maxAge: 0})
     return res.status(200).json({'state': process.env.STATUS_DELETE, 'token': token})
 })
