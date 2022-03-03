@@ -25,7 +25,7 @@ const SearchBar = ({address}) => {
 
     const ButtonClick = () => {
         const beginDate = moment(startDate).format("YYYYMMDD0000")
-        const lastDate = moment(endDate).format("YYYYMMDD0000")
+        const lastDate = moment(subDays((endDate), -1)).format("YYYYMMDD0000")
         let searchFlag = false
         console.log("BUTTON", radioType, departName, beginDate, lastDate)
         radioType == null || departName == null || beginDate >= lastDate ? searchFlag = true : searchFlag = false

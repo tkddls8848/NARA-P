@@ -1,0 +1,15 @@
+
+server {
+	listen 80;
+
+	root /var/www/html;
+
+	server_name naraapi.com www.naraapi.com;
+
+     	location / {
+            	proxy_pass http://localhost:3000;
+       	}
+}
+
+
+
