@@ -5,6 +5,7 @@
 .env
 *.pem
 *.pem.*
+/nginx
 ### NextJS ###
 # Next build dir
 .next/

@@ -7,7 +7,7 @@ const userTaskModel = require('../models/userTaskModel')
 router.use(cookieParser())
 
 router.post('/signin', async (req, res) => {
-    const signinUser = await userModel.findOne({id: req.body.user_id}).exec()    
+    const signinUser = await userModel.findOne({user_id: req.body.user_id}).exec()    
     if(signinUser != null) {
         if(signinUser.user_pw == req.body.user_pw){
             const userId = signinUser.user_id
