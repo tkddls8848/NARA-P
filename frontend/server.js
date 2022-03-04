@@ -1,12 +1,12 @@
 const express = require("express")
 const next = require("next")
+const mongoose = require('mongoose')
+require('dotenv').config({ path: './.env.local' })
+const cookieParser = require('cookie-parser')
+const cors = require('cors')
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev })
 const handle = app.getRequestHandler()
-const mongoose = require('mongoose')
-const cookieParser = require('cookie-parser')
-const cors = require('cors')
-require('dotenv').config({ path: './.env.local' })
 const url = process.env.MONGO_URL
 
 const fs = require('fs')
@@ -19,9 +19,9 @@ const loginRouter = require('./backend/routes/loginRouter')
 const searchLogicRouter = require('./backend/routes/searchLogicRouter')
 
 app.prepare().then(() => {
-  const https = require('https')
   const server = express()
-  const httpsServer = https.createServer({key: key, cert: cert}, server)
+  const https = require('https')
+  const httpsServer = https.createServer({key: key, cert: cert }, server)
 
   server.use(cookieParser())
   server.use(express.json())
@@ -49,11 +49,18 @@ app.prepare().then(() => {
     console.log('TEST')
     return app.render(req, res, "/test")
   })
-
+/*
+  server.listen(process.env.PORT, (err) => {
+    //자체 발급 localhost용 인증서에 대해 유효성 검증 안함
+    if (err) throw err
+    console.log("listening to http server")
+  })
+  */
   httpsServer.listen(process.env.PORT, (err) => {
     //자체 발급 localhost용 인증서에 대해 유효성 검증 안함
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
     if (err) throw err
     console.log("listening to https server")
   })
+
 })
