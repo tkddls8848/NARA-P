@@ -1,8 +1,8 @@
 const Header = (appContent) => {
 
     const router =  appContent.router
-    const menus = ['홈', '검색', '저장된 공고']
-    const urls = ['/', '/task/narasearch', '/usertask/usertask']
+    const menus = ['홈', '검색', 'TODAY s','TODAY b','저장된 공고']
+    const urls = ['/', '/task/narasearch', '/todaytask/todaysajeontask', '/todaytask/todaybonetask','/usertask/usertask']
     const auth = appContent.checkcookies
 
     const clickMenus = (e) => {

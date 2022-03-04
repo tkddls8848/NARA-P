@@ -27,13 +27,11 @@ const SearchBar = ({address}) => {
         const beginDate = moment(startDate).format("YYYYMMDD0000")
         const lastDate = moment(subDays((endDate), -1)).format("YYYYMMDD0000")
         let searchFlag = false
-        console.log("BUTTON", radioType, departName, beginDate, lastDate)
         radioType == null || departName == null || beginDate >= lastDate ? searchFlag = true : searchFlag = false
         if (searchFlag == true) {
             radioType == null ? message += ' 공고타입' : console.log('공고입력완료')
             departName == null ? message += ' 부서명' : console.log('부서입력완료')
             beginDate >= lastDate ? message += ' 날짜' : console.log('기간검증완료')
-            console.log("CHECKER" , message)      
             document.getElementById('warning').innerText = (message + '(이)가 잘못되었습니다.')
             alert(message + '(이)가 잘못되었습니다.')  
         } else {

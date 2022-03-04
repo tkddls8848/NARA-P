@@ -34,9 +34,9 @@ function MyApp({ Component, pageProps }) {
     <Head>
       <title>나라장터 검색 웹 페이지</title>
     </Head>    
-      <Header router={rootRouter} checkcookies={check}></Header>
+      <Header router={rootRouter} checkcookies={check}/>
       <Component {...pageProps}/>
-      <Footer></Footer>
+      <Footer/>
   </>
   )
 }
