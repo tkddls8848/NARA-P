@@ -1,0 +1,106 @@
+import { useEffect, useState } from "react"
+import axios from "axios"
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+const frontAddress = process.env.FRONT_URL
+const backAddress = process.env.BACK_URL
+
+const TodaySearchBar = () => {
+
+    const [type, setType] = useState('')
+    const [departName, setDepartName] = useState('')
+    const [departs, setDeparts] = useState([['s', '국민연금공단'], ['b', '건강보험심사평가원']])
+
+    const changeHandler = (e) => {
+        e.target.id == 'radio' ? setType(e.target.value) : setDepartName(e.target.value) 
+    }
+    const AddArray = () => {
+        const a = setDepartName(departs => [...departs, ['asdf', 'qwer']])
+        return a
+    }
+    const AddTasks = () => {
+        const newDeparts = departs 
+        const JsonDeparts = JSON.stringify(departs)
+        
+        if(departName != null) {
+            if (type == 'sajeon') {
+                if (JsonDeparts.includes(JSON.stringify(['s', departName]))) {
+                    console.log('사전 중복')
+                } else {
+                setDeparts((departs) => [...departs, ['s', departName]])
+            }
+            } else if (JsonDeparts.includes(JSON.stringify(['b', departName]))) {
+                console.log('본 중복')
+            } else {
+                setDeparts((departs) => [...departs, ['b', departName]])
+            }
+        }        
+    }
+
+    const SearchTasks = async () => {
+        let sajeonList = []
+        let boneList = []
+        departs.map((depart) => {
+            depart[0] == 's' ? sajeonList.push(depart) : boneList.push(depart)
+        })
+        console.log('s', sajeonList, 'b', boneList)
+        NProgress.start()
+        const sajeonData = await axios.post(backAddress + '/task/sajeon', { 'departList' : sajeonList })
+        const boneData = await axios.post(backAddress + '/task/bone', { 'departList' : boneList })
+        NProgress.done()
+        console.log(sajeonData.response.data)
+        console.log(boneData.response.data)
+    }
+
+    const DeleteTasks = (e) => {
+        const arr = e.target.id.split('||')
+        let filteredDepart = departs.filter((depart) => JSON.stringify(depart)!=JSON.stringify(arr))
+        setDeparts(filteredDepart)
+    }
+
+    return (
+    <div className="'flex justify-center'">
+        <div className="flex justify-center items-center space-x-6 m-4">
+        <div className="form-check form-check-inline">
+                <input className="form-check-input rounded-full h-4 w-4 border border-gray-300 checked:bg-blue-400 mt-1 align-top mr-2 cursor-pointer"
+                type="radio" name="inlineRadioOptions" id="radio" value="sajeon" onClick={(e) => {changeHandler(e)}}/>
+                <label className="form-check-label inline-block text-gray-800" htmlFor="inlineRadio10">사전공고</label>
+            </div>
+            <div className="form-check form-check-inline">
+                <input className="form-check-input rounded-full h-4 w-4 border border-gray-300 checked:bg-blue-400 mt-1 align-top mr-2 cursor-pointer"
+                type="radio" name="inlineRadioOptions" id="radio" value="bone" onClick={(e) => {changeHandler(e)}}/>
+                <label className="form-check-label inline-block text-gray-800" htmlFor="inlineRadio20">본공고</label>
+            </div>
+            <input 
+            className='border-solid border-2 border-gray-400 rounded-md' 
+            placeholder='부서명' id='input' onChange={(e) => changeHandler(e)}/>
+            <div className="flex flex-row items-center">
+                <button
+                className="inline-block px-6 py-2.5 bg-green-400 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out"
+                onClick={AddTasks}>추가
+                </button>
+                <button
+                className="inline-block px-6 py-2.5 bg-blue-400 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                onClick={SearchTasks}>검색
+                </button>
+            </div>
+        </div>
+        <div className="mx-16 my-4 text-center" id='group'>
+            {departs.map((depart) => (
+                <div key={depart[0]+depart[1]}>
+                    {depart[0]} {depart[1]}
+                    <button
+                    onClick={(e) => DeleteTasks(e)}
+                    id={depart[0]+'||'+depart[1]}>
+                        button
+                    </button>
+                </div>
+            ))}
+        </div>
+        <div className="mx-16 my-4 text-center text-red-500" id='warning' />
+    </div>
+    )
+}
+
+export default TodaySearchBar

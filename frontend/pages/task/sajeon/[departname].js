@@ -1,9 +1,8 @@
-import SajeonTask from '../../component/taskComponent/sajeonTask'
-import SearchBar from '../../component/searchBar'
+import SajeonTask from '../../component/taskComponent/taskSageon'
+import SearchBar from '../../component/taskComponent/taskSearchBar'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import jwt from 'jsonwebtoken'
-import NoData from '../../component/nodata'
 
 const backAddress = process.env.BACK_URL
 const frontAddress = process.env.FRONT_URL

@@ -27,17 +27,18 @@ export const getServerSideProps = async (ctx) => {
   }
 }
 
-export default  function usertask({ toData }) {
-    return(
-      <div>
-        {toData.length == 0 ? 
-        <NoData /> :
-        <div className="grid grid-cols-2 grid-flow-row gap-x-2">
-          {toData.map((d) => (
-            <UserTasks usertasks={d} key={d[2]}></UserTasks>
-          ))}
-        </div>
-        }
-      </div>
-    )
-  }
+const UserTask = ({ toData }) => {
+  return(
+    <div>
+      {toData.length == 0 ? 
+      <NoData /> :
+      <div className="grid grid-cols-2 grid-flow-row gap-x-2">
+        {toData.map((d) => (
+          <UserTasks usertasks={d} key={d[2]}/>
+        ))}
+      </div>}
+    </div>
+  )
+}
+
+export default UserTask

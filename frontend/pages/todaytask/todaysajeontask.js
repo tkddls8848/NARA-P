@@ -1,4 +1,4 @@
-import TodaySearchBar from '../component/todaySearchBar'
+import TodaySearchBar from '../component/todayComponent/todaySearchBar'
 
 const frontAddress = process.env.FRONT_URL
 

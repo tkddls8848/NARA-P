@@ -1,4 +1,4 @@
-import SearchBar from '../component/searchBar'
+import TaskSearchBar from '../component/taskComponent/taskSearchBar'
 
 const frontAddress = process.env.FRONT_URL
 
@@ -18,10 +18,10 @@ export const getServerSideProps = async (ctx) => {
 }
 
 
-const narasearch = () => {
+const TaskSearch = () => {
   return (
     <div>
-      <SearchBar address={frontAddress}></SearchBar>
+      <TaskSearchBar address={frontAddress}></TaskSearchBar>
       <div className='flex justify-center py-10 text-base'>
         검색을 통해 공고를 확인 할 수 있습니다.
       </div>
@@ -29,4 +29,4 @@ const narasearch = () => {
   )
 }
 
-export default narasearch
+export default TaskSearch

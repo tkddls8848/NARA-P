@@ -1,7 +1,7 @@
-import TodaySearchBar from '../component/todaySearchBar'
-import TodaySajeon from '../component/taskComponent/todaySajeon'
+import TodaySearchBar from '../component/todayComponent/todaySearchBar'
+import TodaySajeon from '../component/todayComponent/todaySajeon'
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import jwt from 'jsonwebtoken'
 
 const backAddress = process.env.BACK_URL

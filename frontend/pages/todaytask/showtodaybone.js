@@ -1,5 +1,5 @@
-import TodaySearchBar from '../component/todaySearchBar'
-import TodayBone from '../component/taskComponent/todayBone'
+import TodaySearchBar from '../component/todayComponent/todaySearchBar'
+import TodayBone from '../component/todayComponent/todayBone'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import jwt from 'jsonwebtoken'

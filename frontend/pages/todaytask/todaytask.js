@@ -1,7 +1,5 @@
 import TodaySearchBar from '../component/todayComponent/todaySearchBar'
 
-const frontAddress = process.env.FRONT_URL
-
 export const getServerSideProps = async (ctx) => {
   const jwtCookie = ctx.req.cookies.userCookie
   if (!jwtCookie) {
@@ -18,15 +16,15 @@ export const getServerSideProps = async (ctx) => {
 }
 
 
-const TodayBoneTask = () => {
+const TodayTask = () => {
   return (
     <div>
-      <TodaySearchBar type={'bone'}></TodaySearchBar>
+      <TodaySearchBar></TodaySearchBar>
       <div className='flex justify-center py-10 text-base'>
-        today bone
+        today test
       </div>
     </div>
   )
 }
 
-export default TodayBoneTask
+export default TodayTask

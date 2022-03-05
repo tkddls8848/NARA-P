@@ -5,7 +5,7 @@ import subDays from "date-fns/subDays"
 import moment from "moment"
 import "react-datepicker/dist/react-datepicker.css"
 
-const SearchBar = ({address}) => {
+const TaskSearchBar = ({address}) => {
     const host = address
     const [radioType, setRadioType] = useState(null)
     const [departName, setDepartName] = useState(null)
@@ -15,12 +15,7 @@ const SearchBar = ({address}) => {
     const router = useRouter()
 
     const changeHandler = (e) => {
-        const type = e.target.id
-        if (type == 'radio') {
-            setRadioType(e.target.value) 
-        } else if (type == 'input') {
-            setDepartName(e.target.value) 
-        }
+        e.target.id == 'radio' ? setRadioType(e.target.value) : setDepartName(e.target.value) 
     }
 
     const ButtonClick = () => {
@@ -75,4 +70,4 @@ const SearchBar = ({address}) => {
     )
 }
 
-export default SearchBar
+export default TaskSearchBar
