@@ -1,4 +1,3 @@
-
 import jwt from 'jsonwebtoken'
 
 const backAddress = process.env.BACK_URL

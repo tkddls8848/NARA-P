@@ -1,4 +1,5 @@
 import TodaySearchBar from '../component/todayComponent/todaySearchBar'
+import moment from 'moment'
 
 export const getServerSideProps = async (ctx) => {
   const jwtCookie = ctx.req.cookies.userCookie
@@ -21,7 +22,7 @@ const TodayTask = () => {
     <div>
       <TodaySearchBar></TodaySearchBar>
       <div className='flex justify-center py-10 text-base'>
-        today test
+        {moment(new Date()).format("YYYY/MM/DD")}일의 기관별 공고 검색입니다.
       </div>
     </div>
   )

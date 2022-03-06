@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import { TrashIcon } from '@heroicons/react/solid'
+
 
 const frontAddress = process.env.FRONT_URL
 const backAddress = process.env.BACK_URL
@@ -15,12 +17,8 @@ const TodaySearchBar = () => {
     const changeHandler = (e) => {
         e.target.id == 'radio' ? setType(e.target.value) : setDepartName(e.target.value) 
     }
-    const AddArray = () => {
-        const a = setDepartName(departs => [...departs, ['asdf', 'qwer']])
-        return a
-    }
+
     const AddTasks = () => {
-        const newDeparts = departs 
         const JsonDeparts = JSON.stringify(departs)
         
         if(departName != null) {
@@ -75,7 +73,7 @@ const TodaySearchBar = () => {
             <input 
             className='border-solid border-2 border-gray-400 rounded-md' 
             placeholder='부서명' id='input' onChange={(e) => changeHandler(e)}/>
-            <div className="flex flex-row items-center">
+            <div className="flex flex-row items-center space-x-2 ">
                 <button
                 className="inline-block px-6 py-2.5 bg-green-400 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out"
                 onClick={AddTasks}>추가
@@ -86,14 +84,14 @@ const TodaySearchBar = () => {
                 </button>
             </div>
         </div>
-        <div className="mx-16 my-4 text-center" id='group'>
+        <div className="flex flex-row items-center justify-center" id='group'>
             {departs.map((depart) => (
-                <div key={depart[0]+depart[1]}>
-                    {depart[0]} {depart[1]}
-                    <button
-                    onClick={(e) => DeleteTasks(e)}
-                    id={depart[0]+'||'+depart[1]}>
-                        button
+                <div className="flex flex-row rounded-md m-2 p-1 bg-red-400 text-white" key={depart[0]+depart[1]}>
+                    <div className="p-1 text-xs font-semibold">
+                        {depart[0] == 's' ? '사전공고' : '본공고'} {depart[1]}
+                    </div>
+                    <button className="p-1" onClick={(e) => DeleteTasks(e)} id={depart[0]+'||'+depart[1]}>
+                        <TrashIcon className="flex justify-center h-4 w-4" id={depart[0]+'||'+depart[1]} onClick={(e) => DeleteTasks(e)}/>
                     </button>
                 </div>
             ))}
