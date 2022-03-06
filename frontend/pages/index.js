@@ -32,7 +32,7 @@ export default function Login({ cookie }) {
     } else if (data.data.state == 'not registered user') {
       alert('가입한 정보가 없습니다.')
     } else {
-      router.push(frontAddress + '/task/narasearch')
+      router.push(frontAddress + '/task/tasksearch')
     }
   }
 

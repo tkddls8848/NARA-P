@@ -1,7 +1,7 @@
 import axios from "axios"
 import UserTasks from "../component/userTaskComponent/userTasks"
 import jwt from 'jsonwebtoken'
-import NoData from "../component/nodata"
+import NoData from "../component/staticComponent/nodata"
 
 const backAddress = process.env.BACK_URL
 

@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
-import NProgress from 'nprogress'
+import { useState } from "react"
+import Router from 'next/router'
 import 'nprogress/nprogress.css'
 import { TrashIcon } from '@heroicons/react/solid'
-
 
 const frontAddress = process.env.FRONT_URL
 const backAddress = process.env.BACK_URL
@@ -12,15 +10,13 @@ const TodaySearchBar = () => {
 
     const [type, setType] = useState('')
     const [departName, setDepartName] = useState('')
-    const [departs, setDeparts] = useState([['s', '국민연금공단'], ['b', '건강보험심사평가원']])
+    const [departs, setDeparts] = useState([['s', '국민연금공단'], ['s', '건강보험심사평가원']])
 
     const changeHandler = (e) => {
         e.target.id == 'radio' ? setType(e.target.value) : setDepartName(e.target.value) 
     }
-
     const AddTasks = () => {
-        const JsonDeparts = JSON.stringify(departs)
-        
+        const JsonDeparts = JSON.stringify(departs)        
         if(departName != null) {
             if (type == 'sajeon') {
                 if (JsonDeparts.includes(JSON.stringify(['s', departName]))) {
@@ -40,15 +36,12 @@ const TodaySearchBar = () => {
         let sajeonList = []
         let boneList = []
         departs.map((depart) => {
-            depart[0] == 's' ? sajeonList.push(depart) : boneList.push(depart)
+            depart[0] == 's' ? sajeonList.push(depart[1]) : boneList.push(depart[1])
         })
-        console.log('s', sajeonList, 'b', boneList)
-        NProgress.start()
-        const sajeonData = await axios.post(backAddress + '/task/sajeon', { 'departList' : sajeonList })
-        const boneData = await axios.post(backAddress + '/task/bone', { 'departList' : boneList })
-        NProgress.done()
-        console.log(sajeonData.response.data)
-        console.log(boneData.response.data)
+        Router.push({
+            pathname: frontAddress + '/todaytask/showtodaysajeon',
+            query: sajeonList
+        })
     }
 
     const DeleteTasks = (e) => {

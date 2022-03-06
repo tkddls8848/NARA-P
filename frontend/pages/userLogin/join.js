@@ -35,7 +35,7 @@ const Join = () => {
   }
 
   const joinSubmit = async () => {
-    let data = await axios.post(backAddress + '/login', {'user_id': userId, "user_pw": userPw, 'e_mail': userEmail}, {
+    const data = await axios.post(backAddress + '/login', {'user_id': userId, "user_pw": userPw, 'e_mail': userEmail}, {
       withCgreenentials: true
     })
     if (data.data.state == 'already join user') {

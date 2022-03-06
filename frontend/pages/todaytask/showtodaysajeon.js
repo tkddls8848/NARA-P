@@ -17,7 +17,7 @@ export const getServerSideProps = async (ctx) => {
       },
     }
   }
-  const departList = ctx.req.query.departNames
+  const departList = ctx.req.query
   console.log('ctx', departList)
   const fromServer = await axios.post(backAddress+'/task/sajeon', {'departList' : departList})
   const toServer = fromServer.data
@@ -31,15 +31,13 @@ export const getServerSideProps = async (ctx) => {
   }
 }
 
-const ShowTodaySajeon = ({toServer, user}) => {
+const ShowTodaySajeon = ({toServer}) => {
   const [tasks, setTasks] = useState(toServer)
   const [isdata, setIsdata] = useState(true)
-
-  console.log(toServer)
-  
+ 
   return (
     <div>
-    <TodaySearchBar address={frontAddress}></TodaySearchBar>
+    <TodaySearchBar></TodaySearchBar>
     <div className="h-full w-full grid gap-4 grid-cols-3 grid-rows-3">
         {tasks.map((task) => (
         <div key={task.refNo}>

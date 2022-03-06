@@ -1,10 +1,10 @@
 const router = require('express').Router()
 
-const searchLogicModel = require('../models/searchLogicModel')
+const archiveModel = require('../models/archive/archiveDataModel')
 
 
 router.get('/', async (req, res) => {
-    searchLogicModel.find({}, (err, data) => {
+    archiveModel.find({}, (err, data) => {
         if(err) {
             res.send('error')
         } else {

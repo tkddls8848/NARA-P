@@ -3,6 +3,7 @@ import SearchBar from '../../component/taskComponent/taskSearchBar'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import jwt from 'jsonwebtoken'
+import NoData from '../../component/staticComponent/nodata'
 
 const backAddress = process.env.BACK_URL
 const frontAddress = process.env.FRONT_URL
