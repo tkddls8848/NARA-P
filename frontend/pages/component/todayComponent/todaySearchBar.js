@@ -38,9 +38,14 @@ const TodaySearchBar = () => {
         departs.map((depart) => {
             depart[0] == 's' ? sajeonList.push(depart[1]) : boneList.push(depart[1])
         })
+        sajeonList.length != 0 ?
         Router.push({
             pathname: frontAddress + '/todaytask/showtodaysajeon',
             query: sajeonList
+        }) : 
+        Router.push({
+            pathname: frontAddress + '/todaytask/showtodaybone',
+            query: boneList
         })
     }
 

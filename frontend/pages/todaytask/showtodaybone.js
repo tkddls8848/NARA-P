@@ -36,16 +36,24 @@ const ShowTodayBone = ({toServer, user}) => {
   const [isdata, setIsdata] = useState(true)
 
   console.log(toServer)
+  useEffect(() => {
+    if(tasks.length == 0) {
+      setIsdata(false)
+    }
+  }, [tasks])
   
   return (
     <div>
     <TodaySearchBar address={frontAddress}></TodaySearchBar>
     <div className="h-full w-full grid gap-4 grid-cols-3 grid-rows-3">
-        {tasks.map((task) => (
-        <div key={task.refNo}>
-          <TodayBone task={task}></TodayBone>
-        </div>
-        ))}
+    {isdata ?
+              tasks.map((task) => (
+                <div key={task.refNo}>
+                  <TodayBone task={task} />
+                </div>
+                )) :
+                <NoData />
+      }
       </div>
     </div>
   )
