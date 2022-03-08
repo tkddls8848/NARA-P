@@ -18,9 +18,9 @@ const TodaySajeon = ({task}) => {
   }, [])
 
   return (
-    <div className="h-full p-4 bg-white rounded-xl shadow-lg flex items-center space-x-3">
+    <div className="h-full p-2 bg-white rounded-xl border-2 border-blue-400 shadow-lg flex items-center space-x-3">
       <span className="inline-block align-top" key={ taskTitle + departName + registerDate }>
-        <div className="text-xl font-medium text-black" key={taskTitle}>{taskTitle}</div>
+        <div className="text-xl font-medium text-black" key={taskTitle}>(사전공고) {taskTitle}</div>
         <p className="text-slate-500">기관명 : {departName}</p>
         <p className="text-slate-500">등록일 : {registerDate}</p>
         <p className="text-slate-500">마감일 : {closeDate}</p>

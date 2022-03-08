@@ -1,5 +1,5 @@
-import TodaySearchBar from '../component/todayComponent/todaySearchBar'
 import moment from 'moment'
+import TodaySearchBar from '../component/todayComponent/todaySearchBar'
 
 export const getServerSideProps = async (ctx) => {
   const jwtCookie = ctx.req.cookies.userCookie
@@ -16,15 +16,12 @@ export const getServerSideProps = async (ctx) => {
   }
 }
 
-
 const TodayTask = () => {
   return (
     <div>
-      <TodaySearchBar></TodaySearchBar>
-      <div className='flex justify-center py-10 text-base'>
-        {moment(new Date()).format("YYYY/MM/DD")}일의 기관별 공고 검색입니다.
-        지금은 기능상 2개 기관만 가능
-        사전공고만
+      <TodaySearchBar />
+      <div className='flex flex-col items-center py-10 text-base'>
+        <div className='py-2'>{moment(new Date()).format("YYYY/MM/DD")}일의 기관별 공고 검색입니다.</div>
       </div>
     </div>
   )

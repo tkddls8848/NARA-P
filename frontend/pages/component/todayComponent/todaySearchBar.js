@@ -4,7 +4,6 @@ import 'nprogress/nprogress.css'
 import { TrashIcon } from '@heroicons/react/solid'
 
 const frontAddress = process.env.FRONT_URL
-const backAddress = process.env.BACK_URL
 
 const TodaySearchBar = () => {
 
@@ -33,19 +32,13 @@ const TodaySearchBar = () => {
     }
 
     const SearchTasks = async () => {
-        let sajeonList = []
-        let boneList = []
+        const departList = []
         departs.map((depart) => {
-            depart[0] == 's' ? sajeonList.push(depart[1]) : boneList.push(depart[1])
+            departList.push(depart[1])
         })
-        sajeonList.length != 0 ?
         Router.push({
-            pathname: frontAddress + '/todaytask/showtodaysajeon',
-            query: sajeonList
-        }) : 
-        Router.push({
-            pathname: frontAddress + '/todaytask/showtodaybone',
-            query: boneList
+            pathname: frontAddress + '/todaytask/todaytaskshow',
+            query: departList
         })
     }
 
@@ -58,16 +51,6 @@ const TodaySearchBar = () => {
     return (
     <div className="'flex justify-center'">
         <div className="flex justify-center items-center space-x-6 m-4">
-        <div className="form-check form-check-inline">
-                <input className="form-check-input rounded-full h-4 w-4 border border-gray-300 checked:bg-blue-400 mt-1 align-top mr-2 cursor-pointer"
-                type="radio" name="inlineRadioOptions" id="radio" value="sajeon" onClick={(e) => {changeHandler(e)}}/>
-                <label className="form-check-label inline-block text-gray-800" htmlFor="inlineRadio10">사전공고</label>
-            </div>
-            <div className="form-check form-check-inline">
-                <input className="form-check-input rounded-full h-4 w-4 border border-gray-300 checked:bg-blue-400 mt-1 align-top mr-2 cursor-pointer"
-                type="radio" name="inlineRadioOptions" id="radio" value="bone" onClick={(e) => {changeHandler(e)}}/>
-                <label className="form-check-label inline-block text-gray-800" htmlFor="inlineRadio20">본공고</label>
-            </div>
             <input 
             className='border-solid border-2 border-gray-400 rounded-md' 
             placeholder='부서명' id='input' onChange={(e) => changeHandler(e)}/>
@@ -86,7 +69,7 @@ const TodaySearchBar = () => {
             {departs.map((depart) => (
                 <div className="flex flex-row rounded-md m-2 p-1 bg-red-400 text-white" key={depart[0]+depart[1]}>
                     <div className="p-1 text-xs font-semibold">
-                        {depart[0] == 's' ? '사전공고' : '본공고'} {depart[1]}
+                        {depart[1]}
                     </div>
                     <button className="p-1" onClick={(e) => DeleteTasks(e)} id={depart[0]+'||'+depart[1]}>
                         <TrashIcon className="flex justify-center h-4 w-4" id={depart[0]+'||'+depart[1]} onClick={(e) => DeleteTasks(e)}/>

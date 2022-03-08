@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { useRouter } from "next/router"
-import jwt from 'jsonwebtoken'
 
 const frontAddress = process.env.FRONT_URL
 const backAddress = process.env.BACK_URL
@@ -11,7 +10,6 @@ const Join = () => {
   const [userPw, setUserPw] = useState('')
   const [userRePw, setUserRePw] = useState()
   const [userEmail, setUserEmail] = useState('')  
-  let passwordInputChecker = false
   const router = useRouter()
 
   useEffect(() => {
@@ -29,7 +27,6 @@ const Join = () => {
     } else if (type == 'email') {
       setUserEmail(e.target.value) 
     } else if (type == 'repw') {
-      e.target.value == userPw ? passwordInputChecker = true : passwordInputChecker = false
       setUserRePw(e.target.value) 
     } 
   }

@@ -68,7 +68,6 @@ router.post('/sajeon', async (req, res) => {
     }))
     .then(() => {
             dataSet.sort((a, b) => { return a.rcptDt > b.rcptDt ? -1 :  a.rcptDt < b.rcptDt ? 1 : 0 })
-            console.log('dataSet',dataSet)
             res.send(dataSet)
     })        
 })
@@ -130,8 +129,6 @@ router.post('/bone', async (req, res) => {
             for(let i = 0 ; i < result.data.response.body.items.length ; i++){
                 result.data.response.body.items[i].type = 'bone'
                 result.data.response.body.items[i].isNew = true
-                console.log(result.data.response.body.items[i].bidNtceNm)
-                console.log(result.data.response.body.items[i].dminsttNm)
                 dataSet.push(result.data.response.body.items[i])
             }                
         }

@@ -1,9 +1,9 @@
-import BoneTask from '../../component/taskComponent/taskBone'
 import SearchBar from '../../component/taskComponent/taskSearchBar'
+import TaskBone from '../../component/taskComponent/taskBone'
+import NoData from '../../component/staticComponent/nodata'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import jwt from 'jsonwebtoken'
-import NoData from '../../component/staticComponent/nodata'
 
 const backAddress = process.env.BACK_URL
 const frontAddress = process.env.FRONT_URL
@@ -48,10 +48,10 @@ export default  function BoneComponent({ toServer, user }) {
     <div>
     <SearchBar address={frontAddress}></SearchBar>
       {isdata ? 
-      <div className="h-full w-full grid gap-4 grid-cols-3 grid-rows-3">
+      <div className="h-full w-full p-4 grid gap-2 grid-cols-4">
         {tasks.map((task) => (
         <div key={task.refNo}>
-          <BoneTask task={task} user={user}></BoneTask>
+          <TaskBone task={task} user={user}></TaskBone>
         </div> ))}
       </div> :
       <NoData />}

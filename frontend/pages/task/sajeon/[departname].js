@@ -1,9 +1,9 @@
-import SajeonTask from '../../component/taskComponent/taskSageon'
 import SearchBar from '../../component/taskComponent/taskSearchBar'
+import SajeonTask from '../../component/taskComponent/taskSageon'
+import NoData from '../../component/staticComponent/nodata'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import jwt from 'jsonwebtoken'
-import NoData from '../../component/staticComponent/nodata'
 
 const backAddress = process.env.BACK_URL
 const frontAddress = process.env.FRONT_URL
@@ -47,7 +47,7 @@ const SajeonComponent = ({toServer, user}) => {
     <div>
     <SearchBar address={frontAddress}></SearchBar>
       {isdata ? 
-      <div className="h-full w-full grid gap-4 grid-cols-3 grid-rows-3">
+      <div className="h-full w-full p-4 grid gap-2 grid-cols-4">
         {tasks.map((task) => (
         <div key={task.refNo}>
           <SajeonTask task={task} user={user}></SajeonTask>
