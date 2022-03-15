@@ -23,9 +23,7 @@ const TodaySajeon = ({task}) => {
         <div className="text-xl font-medium text-black" key={taskTitle}>(사전공고) {taskTitle}</div>
         <p className="text-slate-500">기관명 : {departName}</p>
         <p className="text-slate-500">등록일 : {registerDate}</p>
-        <p className="text-slate-500">마감일 : {closeDate}</p>
-        <p className="text-slate-500">다운로드1 : <a href= {downloadLink}>다운로드</a></p>
-        <p className="text-slate-500">최신여부 : {isNew.toString()}</p>
+        <p className="text-slate-500">파일링크1 : <a href= {downloadLink}>다운로드</a></p>
       </span>
     </div>
   )

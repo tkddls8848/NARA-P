@@ -1,7 +1,6 @@
 import '../styles/globals.css'
-import { useEffect } from 'react'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+import { useRouter, useEffect } from 'next/router'
 import Header from './component/staticComponent/header'
 import Footer from './component/staticComponent/footer'
 import NProgress from 'nprogress'

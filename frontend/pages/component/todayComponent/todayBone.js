@@ -24,11 +24,8 @@ const TodayBone = ({task}) => {
       <span className="inline-block align-top"  key={taskNumber + departName + taskTitle}>
         <div className="text-xl font-medium text-black" key={taskTitle}>(본공고) {taskTitle}</div>
         <p className="text-slate-500">기관명 : {departName}</p>
-        <p className="text-slate-500">사업명 : {taskTitle}</p>
         <p className="text-slate-500">접수등록 : {registerDate}</p>
-        <p className="text-slate-500">마감 : {closeDate}</p>
         <p className="text-slate-500">파일링크1 : <a underline="hover" href={downloadLink}>다운로드 링크</a></p>
-        <p className="text-slate-500">최신여부 : {isNew.toString()}</p>
       </span>
     </div>
   )

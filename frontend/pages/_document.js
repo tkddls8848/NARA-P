@@ -7,7 +7,6 @@ class MyDocument  extends Document {
                 <Head>
                     <link rel='icon' href='/naraapi.jpg'></link>
                     <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
-                    <meta name="google-site-verification" content="37Qt-RHCauaYHeSXVDdfmVyj5xjT2GlCnpmhSumhPTQ" />
                 </Head>
                 <body>
                     <Main></Main>
