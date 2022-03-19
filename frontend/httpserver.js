@@ -13,6 +13,7 @@ const taskRouter = require('./backend/routes/taskRouter')
 const userTaskRouter = require('./backend/routes/userTaskRouter')
 const loginRouter = require('./backend/routes/loginRouter')
 const searchLogicRouter = require('./backend/routes/searchLogicRouter')
+const listSearchRouter = require('./backend/routes/listSearchRouter')
 
 app.prepare().then(() => {
   const server = express()
@@ -28,6 +29,7 @@ app.prepare().then(() => {
   server.use('/api/v1/usertask', userTaskRouter)
   server.use('/api/v1/login', loginRouter)
   server.use('/api/v1/logic', searchLogicRouter)
+  server.use('/api/v1/list', listSearchRouter)
   
   mongoose.connect(url).then((result) => {
     console.log("LOGIN MONGO CONNECT")
@@ -43,7 +45,7 @@ app.prepare().then(() => {
     console.log('TEST')
     return app.render(req, res, "/test")
   })
-
+  
   server.listen(process.env.PORT, (err) => {
     if (err) throw err
     console.log("listening to http server")
