@@ -1,3 +1,13 @@
+
+
+export const getServerSideProps = async (ctx) => {
+  console.log("ctx", ctx.res.body)
+  console.log("ctx", ctx.req.body)
+  return {
+    props: {}
+  }
+}
+
 export default function AboutMe() {
 
     return (
