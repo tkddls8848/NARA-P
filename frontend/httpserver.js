@@ -34,7 +34,7 @@ app.prepare().then(() => {
   mongoose.connect(url).then((result) => {
     console.log("LOGIN MONGO CONNECT")
   }).catch((err) => {
-    console.log("LOGIN MONGO ERR")
+    console.log("LOGIN MONGO ERR", err)
   })
 
   server.get("*", (req, res) => {
