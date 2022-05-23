@@ -1,6 +1,6 @@
 import SearchBar from '../../component/taskComponent/taskSearchBar'
 import TaskBone from '../../component/taskComponent/taskBone'
-import NoData from '../../component/staticComponent/nodata'
+import NoData from '../../component/staticComponent/noData'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import jwt from 'jsonwebtoken'
@@ -41,8 +41,7 @@ export default  function BoneComponent({ toServer, user }) {
   useEffect(() => {
     if(tasks.length == 0) {
       setIsdata(false)
-    }
-  }, [tasks])
+    }}, [tasks])
 
   return (
     <div>

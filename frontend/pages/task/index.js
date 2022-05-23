@@ -19,6 +19,7 @@ export const getServerSideProps = async (ctx) => {
 
 
 const TaskSearch = () => {
+  
   return (
     <div>
       <TaskSearchBar address={frontAddress}></TaskSearchBar>
