@@ -9,11 +9,11 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 const url = process.env.MONGO_URL
 
-const taskRouter = require('./backend/routes/taskRouter')
-const userTaskRouter = require('./backend/routes/userTaskRouter')
-const loginRouter = require('./backend/routes/loginRouter')
-const searchLogicRouter = require('./backend/routes/searchLogicRouter')
-const listSearchRouter = require('./backend/routes/listSearchRouter')
+const taskRouter = require('./customserver/routes/taskRouter')
+const userTaskRouter = require('./customserver/routes/userTaskRouter')
+const loginRouter = require('./customserver/routes/loginRouter')
+const searchLogicRouter = require('./customserver/routes/searchLogicRouter')
+const listSearchRouter = require('./customserver/routes/listSearchRouter')
 
 app.prepare().then(() => {
   const server = express()
