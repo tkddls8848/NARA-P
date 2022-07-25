@@ -1,6 +1,6 @@
 import SearchBar from '../../component/taskComponent/taskSearchBar'
 import SajeonTask from '../../component/taskComponent/taskSageon'
-import NoData from '../../component/staticComponent/nodata'
+import NoData from '../../component/staticComponent/noData'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import jwt from 'jsonwebtoken'

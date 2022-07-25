@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import TodaySearchBar from '../component/todayComponent/todaySearchBar'
 import TodaySajeon from '../component/todayComponent/todaySajeon'
 import TodayBone from '../component/todayComponent/todayBone'
-import NoData from '../component/staticComponent/nodata'
+import NoData from '../component/staticComponent/noData'
 
 const backAddress = process.env.BACK_URL
 
