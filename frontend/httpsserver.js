@@ -1,7 +1,7 @@
 const express = require("express")
 const next = require("next")
 const mongoose = require('mongoose')
-require('dotenv').config({ path: './.env.https.local' })
+require('dotenv').config({ path: './config_files/.env.https.local' })
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const dev = process.env.NODE_ENV !== "production"
@@ -10,8 +10,8 @@ const handle = app.getRequestHandler()
 const url = process.env.MONGO_URL
 
 const fs = require('fs')
-const key = fs.readFileSync('./localhost-key.pem')
-const cert = fs.readFileSync('./localhost.pem')
+const key = fs.readFileSync('./config_files/localhost-key.pem')
+const cert = fs.readFileSync('./config_files/localhost.pem')
 
 const taskRouter = require('./customserver/routes/taskRouter')
 const userTaskRouter = require('./customserver/routes/userTaskRouter')
@@ -41,6 +41,7 @@ app.prepare().then(() => {
     console.log("LOGIN MONGO CONNECT")
   }).catch((err) => {
     console.log("LOGIN MONGO ERR")
+    console.log(err)
   })
 
   server.get("*", (req, res) => {
@@ -56,7 +57,7 @@ app.prepare().then(() => {
     //자체 발급 localhost용 인증서에 대해 유효성 검증 안함
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
     if (err) throw err
-    console.log("listening to https server")
+    else console.log("listening to https server")
   })
 
 

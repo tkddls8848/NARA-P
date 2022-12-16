@@ -4,6 +4,7 @@
 localhost-key.pem
 localhost.pem
 .env*
+ca.*
 
 ### NextJS ###
 # Dependencies

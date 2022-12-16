@@ -1,7 +1,7 @@
 const express = require("express")
 const next = require("next")
 const mongoose = require('mongoose')
-require('dotenv').config({ path: './.env.http.local' })
+require('dotenv').config({ path: './config_files/.env.http.local' })
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const dev = process.env.NODE_ENV !== "production"
