@@ -1,0 +1,14 @@
+version: '3'
+services:
+  naraapi:
+    container_name: my-naraapi
+    build: ./frontend
+    ports:
+      - "3000:3000"
+  nginx:
+    container_name: my-nginx
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - naraapi

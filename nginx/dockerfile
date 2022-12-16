@@ -1,0 +1,9 @@
+FROM nginx:1.17-alpine
+
+COPY ./config_files/default.conf ./etc/nginx/conf.d/
+
+COPY ./config_files/localhost-key.pem ./etc/nginx/
+
+COPY ./config_files/localhost.pem ./etc/nginx/
+
+COPY ./index.html ./usr/share/nginx/html/index.html
