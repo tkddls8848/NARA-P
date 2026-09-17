@@ -1,0 +1,14 @@
+# 줄바꿈은 LF 로 통일한다.
+#
+# 리눅스와 윈도우를 오가며 작업하므로, 머신마다 다른 core.autocrlf 설정에 맡기면 같은
+# 파일이 CRLF 와 LF 사이를 오간다. 그러면 한 줄만 고쳐도 파일 전체가 diff 로 잡혀
+# 리뷰가 불가능해지고, 셸 스크립트의 셔뱅이 `/usr/bin/env bash\r` 로 읽히거나 설정
+# 파일의 값 끝에 \r 이 붙어 파서가 오작동한다.
+#
+# eol=lf 는 저장소와 작업트리 양쪽을 LF 로 고정하며 개인 core.autocrlf 설정을 이긴다.
+# 에디터 쪽 짝은 .editorconfig 에 있다.
+* text=auto eol=lf
+
+# 윈도우 배치 파일만 예외다. cmd.exe 는 LF 줄바꿈에서 라벨과 goto 를 잘못 읽는다.
+*.bat text eol=crlf
+*.cmd text eol=crlf

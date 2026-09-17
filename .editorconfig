@@ -1,0 +1,12 @@
+# 에디터와 포매터가 저장할 때 줄바꿈을 되돌리지 않게 한다.
+# 강제는 .gitattributes 가 하고, 이 파일은 도구들이 같은 규칙을 보게 맞춘다.
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+
+# 윈도우 배치 파일만 예외다.
+[*.{bat,cmd}]
+end_of_line = crlf
